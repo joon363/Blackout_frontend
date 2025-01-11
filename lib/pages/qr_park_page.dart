@@ -5,15 +5,15 @@ import 'package:bremen/pages/scanner_button_widgets.dart';
 import 'package:bremen/pages/scanner_error_widget.dart';
 import 'package:bremen/themes.dart';
 
-class QRPage extends StatefulWidget {
-  const QRPage({super.key});
+class QRParkPage extends StatefulWidget {
+  const QRParkPage({super.key});
 
   @override
-  State<QRPage> createState() =>
-  _QRPageState();
+  State<QRParkPage> createState() =>
+  _QRParkPageState();
 }
 
-class _QRPageState extends State<QRPage> {
+class _QRParkPageState extends State<QRParkPage> {
   final MobileScannerController controller = MobileScannerController(
     formats: const [BarcodeFormat.qrCode],
   );
@@ -45,7 +45,8 @@ class _QRPageState extends State<QRPage> {
                   padding: const EdgeInsets.only(top: defaultPadding*5),
                   child: Align(
                     alignment: Alignment.topCenter,
-                    child: ScannedBarcodeLabel(barcodes: controller.barcodes),
+                    child: ScannedBarcodeLabel(barcodes: controller.barcodes,
+                    text: '올바르게 주차되어 있는지 확인해 주세요.',),
                   ),
                 );
               },
@@ -61,7 +62,7 @@ class _QRPageState extends State<QRPage> {
               }
 
               return CustomPaint(
-                painter: ScannerOverlay(scanWindow: scanWindow),
+                painter: ParkScannerOverlay(scanWindow: scanWindow),
               );
             },
           ),
@@ -75,7 +76,6 @@ class _QRPageState extends State<QRPage> {
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
-                    NumberInputButton(controller: controller),
                     ToggleFlashlightButton(controller: controller),
                   ],
                 ),
@@ -83,8 +83,7 @@ class _QRPageState extends State<QRPage> {
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
-                    ExitButton(),
-                    DebugContinueButton(),
+                    DebugParkContinueButton(),
                   ],
                 ),
                 SizedBox(height: defaultPadding*2,)
@@ -104,8 +103,8 @@ class _QRPageState extends State<QRPage> {
   }
 }
 
-class ScannerOverlay extends CustomPainter {
-  const ScannerOverlay({
+class ParkScannerOverlay extends CustomPainter {
+  const ParkScannerOverlay({
     required this.scanWindow,
     this.borderRadius = 12.0,
     this.cornerLength = 20.0, // 꺾쇠의 길이
@@ -146,7 +145,7 @@ class ScannerOverlay extends CustomPainter {
     );
 
     final borderPaint = Paint()
-      ..color = primaryColor
+      ..color = errorColor
       ..style = PaintingStyle.stroke
       ..strokeWidth = 4.0;
 
@@ -211,7 +210,7 @@ class ScannerOverlay extends CustomPainter {
   }
 
   @override
-  bool shouldRepaint(ScannerOverlay oldDelegate) {
+  bool shouldRepaint(ParkScannerOverlay oldDelegate) {
     return scanWindow != oldDelegate.scanWindow ||
       borderRadius != oldDelegate.borderRadius;
   }

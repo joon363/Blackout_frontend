@@ -6,9 +6,11 @@ class ScannedBarcodeLabel extends StatelessWidget {
   const ScannedBarcodeLabel({
     super.key,
     required this.barcodes,
+    this.text = 'QR코드를 스캔하여\n탑승을 시작하세요.'
   });
 
   final Stream<BarcodeCapture> barcodes;
+  final String text;
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +20,7 @@ class ScannedBarcodeLabel extends StatelessWidget {
         final scannedBarcodes = snapshot.data?.barcodes ?? [];
 
         if (scannedBarcodes.isEmpty) {
-          return PText('QR코드를 스캔하여\n탑승을 시작하세요.', PFontStyle.headline2, textWhiteColor, semiboldInter);
+          return PText(text, PFontStyle.headline2, textWhiteColor, semiboldInter);
         }
 
         return Text(

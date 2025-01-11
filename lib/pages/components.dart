@@ -1,46 +1,40 @@
 import 'package:flutter/material.dart';
 import 'package:bremen/Connection/state_manager.dart';
 import 'package:bremen/themes.dart';
-
+const List<String> names = [
+  'assets/images/beforerank.png',
+  'assets/images/bronze.png',
+  'assets/images/bulb.png',
+  'assets/images/city.png',
+  'assets/images/gold.png',
+  'assets/images/iron.png',
+  'assets/images/map.png',
+  'assets/images/map_result.png',
+  'assets/images/map_wide.png',
+  'assets/images/numbers.png',
+  'assets/images/platinum.png',
+  'assets/images/profile.png',
+  'assets/images/qr.png',
+  'assets/images/rankup.png',
+  'assets/images/scooter_badge.png',
+  'assets/images/silver.png',
+  'assets/images/stars.png',
+  'assets/images/tree_badge.png',
+];
 class ProfileImage extends StatelessWidget {
   const ProfileImage({super.key, this.size = 35});
   final double size;
 
   @override
   Widget build(BuildContext context) {
-    precacheImage(
-      Image.asset('assets/images/scooter_badge.png').image,
-      context,
-    );
-    precacheImage(
-      Image.asset('assets/images/tree_badge.png').image,
-      context,
-    );
-    precacheImage(
-      Image.asset('assets/images/profile.png').image,
-      context,
-    );
-    precacheImage(
-      Image.asset('assets/images/map.png').image,
-      context,
-    );
-    precacheImage(
-      Image.asset('assets/images/qr.png').image,
-      context,
-    );
-    precacheImage(
-      Image.asset('assets/images/map_wide.png').image,
-      context,
-    );
-    precacheImage(
-      Image.asset('assets/images/bulb.png').image,
-      context,
-    );
-    precacheImage(
-      Image.asset('assets/images/numbers.png').image,
-      context,
-    );
-
+    for(int i=0;i<names.length;i++) {
+      precacheImage(
+        Image
+            .asset(names[i])
+            .image,
+        context,
+      );
+    }
     return CircleAvatar(
       radius: size, // 원의 크기 설정
       backgroundImage: Image.asset('assets/images/profile.png').image,

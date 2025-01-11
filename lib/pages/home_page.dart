@@ -149,7 +149,10 @@ class _HomePageState extends State<HomePage> {
                               highlightColor: Colors.white10,
 
                               onTap: () {
-                                print("haha it does nothing~~");
+                                Navigator.pushNamed(
+                                  context,
+                                  htmlViewPageRoute,
+                                );
                               }
                             ),
                           ),

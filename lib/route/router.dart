@@ -1,3 +1,4 @@
+import 'package:bremen/pages/ride_result_page.dart';
 import 'package:flutter/material.dart';
 import 'package:bremen/pages/pages.dart';
 import '/route/route_constants.dart';
@@ -18,7 +19,12 @@ Route<dynamic> generateRoute(RouteSettings settings) {
     case qrPageRoute:
       return MaterialPageRoute(
         settings: RouteSettings(name: qrPageRoute),
-        builder: (context) => const BarcodeScannerWithOverlay(),
+        builder: (context) => const QRPage(),
+      );
+    case qrParkPageRoute:
+      return MaterialPageRoute(
+        settings: RouteSettings(name: qrParkPageRoute),
+        builder: (context) => const QRParkPage(),
       );
     case cameraPageRoute:
       final List<CameraDescription> _cameras = settings.arguments as List<CameraDescription>;
@@ -36,6 +42,38 @@ Route<dynamic> generateRoute(RouteSettings settings) {
       return MaterialPageRoute(
         settings: RouteSettings(name: gameLoadingPageRoute),
         builder: (context) => GameLoadingPage(),
+      );
+    case parkLoadingPageRoute:
+      return MaterialPageRoute(
+        settings: RouteSettings(name: parkLoadingPageRoute),
+        builder: (context) => ParkLoadingPage(),
+      );
+    case htmlViewPageRoute:
+      return MaterialPageRoute(
+        settings: RouteSettings(name: htmlViewPageRoute),
+        builder: (context) => LocalHtmlPage(),
+      );
+    case rideResultPageRoute:
+      return MaterialPageRoute(
+        settings: RouteSettings(name: rideResultPageRoute),
+        builder: (context) => RideResultPage(),
+      );
+    case rankResultPageRoute:
+      return PageRouteBuilder(
+        pageBuilder: (context, animation, secondaryAnimation) => RankResultPage(),
+        transitionsBuilder: (context, animation, secondaryAnimation, child) {
+          const begin = Offset(1.0, 0.0); // 새 화면이 오른쪽에서 시작
+          const end = Offset.zero;        // 새 화면이 제자리로 이동
+          const curve = Curves.easeInOut;
+
+          var tween = Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
+          var offsetAnimation = animation.drive(tween);
+
+          return SlideTransition(
+            position: offsetAnimation,
+            child: child,
+          );
+        },
       );
     // case missionPageRoute:
     //   return MaterialPageRoute(

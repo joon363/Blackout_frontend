@@ -46,6 +46,28 @@ class DebugContinueButton extends StatelessWidget {
     );
   }
 }
+class DebugParkContinueButton extends StatelessWidget {
+  const DebugParkContinueButton({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return IconButton(
+      color: Colors.white,
+      //iconSize: 32.0,
+      icon: CircleAvatar(
+          radius: 30, // 원의 반지름
+          backgroundColor: Colors.white, // 하얀 배경
+          child: Icon(CupertinoIcons.arrow_right, size: 30, color: primaryColor)
+      ),
+      onPressed: () async {
+        Navigator.pushReplacementNamed(
+          context,
+          rideResultPageRoute,
+        );
+      },
+    );
+  }
+}
 class NumberInputButton extends StatelessWidget {
   const NumberInputButton({required this.controller, super.key});
 
