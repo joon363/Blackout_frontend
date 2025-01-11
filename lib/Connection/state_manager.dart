@@ -7,6 +7,7 @@ class GlobalState with ChangeNotifier {
   int userRankIndex = 2;
   int currentExp = 30;
   int nextRankExp = 100;
+  String qrResult = "";
 
   Future<void> updateUserRank(String newRank) async {
     userRank = newRank;
@@ -14,6 +15,10 @@ class GlobalState with ChangeNotifier {
   }
   int getRemainExp() {
     return nextRankExp - currentExp;
+  }
+  void setQrResult(String str) {
+    qrResult = str;
+    print("QR scanned: $str");
   }
 }
 

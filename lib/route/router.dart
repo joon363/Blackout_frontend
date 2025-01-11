@@ -14,11 +14,11 @@ Route<dynamic> generateRoute(RouteSettings settings) {
         settings: RouteSettings(name: rankPageRoute),
         builder: (context) => const RankPage(),
       );
-    // case robotPageRoute:
-    //   return MaterialPageRoute(
-    //     settings: RouteSettings(name: robotPageRoute),
-    //     builder: (context) => const RobotPage(),
-    //   );
+    case qrPageRoute:
+      return MaterialPageRoute(
+        settings: RouteSettings(name: qrPageRoute),
+        builder: (context) => const BarcodeScannerWithOverlay(),
+      );
     // case missionPageRoute:
     //   return MaterialPageRoute(
     //     settings: RouteSettings(name: missionPageRoute),

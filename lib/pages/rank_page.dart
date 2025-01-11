@@ -1,5 +1,4 @@
 import 'package:bremen/themes.dart';
-import 'package:bremen/pages/components.dart';
 import 'package:flutter/material.dart';
 import 'package:bremen/Connection/state_manager.dart';
 

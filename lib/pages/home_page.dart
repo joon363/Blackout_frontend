@@ -1,3 +1,4 @@
+import 'package:bremen/route/route_constants.dart';
 import 'package:bremen/themes.dart';
 import 'package:bremen/Connection/state_manager.dart';
 import 'package:bremen/pages/components.dart';
@@ -31,10 +32,7 @@ class _HomePageState extends State<HomePage> {
                 height: defaultPadding,
               ),
               // GCOO text
-              Container(
-                child: PText(
-                    "GCOO", PFontStyle.display1, primaryColor, semiboldInter),
-              ),
+              PText("GCOO", PFontStyle.display1, primaryColor, semiboldInter),
 
               // notice
               Container(
@@ -190,7 +188,29 @@ class _HomePageState extends State<HomePage> {
                             color: Colors.transparent,
                             child: InkWell(
                               highlightColor: Colors.white10,
-                              onTap: () {print("yes");},
+                              onTap: () async {
+                                // TODO: activate on release
+                                // String? res = await SimpleBarcodeScanner.scanBarcode(
+                                //   context,
+                                //   barcodeAppBar: const BarcodeAppBar(
+                                //     appBarTitle: 'QR Scan',
+                                //     centerTitle: false,
+                                //     enableBackButton: true,
+                                //     backButtonIcon: Icon(Icons.arrow_back_ios),
+                                //   ),
+                                //   isShowFlashIcon: true,
+                                //   delayMillis: 2000,
+                                //   cameraFace: CameraFace.back,
+                                // );
+                                setState(() {
+                                  // TODO: activate on release
+                                  // globalState.setQrResult(res as String);
+                                });
+                                Navigator.pushNamed(
+                                  context,
+                                  qrPageRoute,
+                                );
+                              },
                             ),
                           ),
                         ),

@@ -32,6 +32,15 @@ class ProfileImage extends StatelessWidget {
       Image.asset('assets/images/map_wide.png').image,
       context,
     );
+    precacheImage(
+      Image.asset('assets/images/bulb.png').image,
+      context,
+    );
+    precacheImage(
+      Image.asset('assets/images/numbers.png').image,
+      context,
+    );
+
     return CircleAvatar(
       radius: size, // 원의 크기 설정
       backgroundImage: Image.asset('assets/images/profile.png').image,
@@ -57,7 +66,7 @@ class RankIndicator extends StatelessWidget {
                 PFontStyle.label, textGrayColor, semiboldInter)
           ],
         ),
-        Container(
+        SizedBox(
           height: 10,
           child: LinearProgressIndicator(
             value: globalState.currentExp / globalState.nextRankExp,

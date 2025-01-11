@@ -30,7 +30,7 @@ class ProfilePage extends StatelessWidget {
 
                 ),
               ),
-              Container(
+              SizedBox(
                 height: 200,
                 child:Image.asset('assets/images/profile.png'),
               ),
