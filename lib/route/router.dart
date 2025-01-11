@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:bremen/pages/pages.dart';
 import '/route/route_constants.dart';
+import 'package:camera/camera.dart';
 
 Route<dynamic> generateRoute(RouteSettings settings) {
   switch (settings.name) {
@@ -18,6 +19,23 @@ Route<dynamic> generateRoute(RouteSettings settings) {
       return MaterialPageRoute(
         settings: RouteSettings(name: qrPageRoute),
         builder: (context) => const BarcodeScannerWithOverlay(),
+      );
+    case cameraPageRoute:
+      final List<CameraDescription> _cameras = settings.arguments as List<CameraDescription>;
+      //
+      return MaterialPageRoute(
+        settings: RouteSettings(name: cameraPageRoute),
+        builder: (context) => CameraPage(cameras: _cameras),
+      );
+    case loginPageRoute:
+      return MaterialPageRoute(
+        settings: RouteSettings(name: loginPageRoute),
+        builder: (context) => LoginPage(),
+      );
+    case gameLoadingPageRoute:
+      return MaterialPageRoute(
+        settings: RouteSettings(name: gameLoadingPageRoute),
+        builder: (context) => GameLoadingPage(),
       );
     // case missionPageRoute:
     //   return MaterialPageRoute(
@@ -64,10 +82,10 @@ Route<dynamic> generateRoute(RouteSettings settings) {
     //     builder: (context) => LoginLoadingPage(),
     //   );
     default:
-      return MaterialPageRoute(
-        settings: RouteSettings(name: homePageRoute),
-        builder: (context) => const HomePage(title:"hello"),
-      );
+    return MaterialPageRoute(
+      settings: RouteSettings(name: homePageRoute),
+      builder: (context) => const HomePage(title:"hello"),
+    );
 
   }
 }

@@ -18,8 +18,8 @@ class ScannerErrorWidget extends StatelessWidget {
       case MobileScannerErrorCode.unsupported:
         errorMessage = 'Scanning is unsupported on this device';
       default:
-        errorMessage = 'Generic Error';
-        break;
+      errorMessage = 'Generic Error';
+      break;
     }
 
     return ColoredBox(

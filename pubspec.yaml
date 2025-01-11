@@ -38,7 +38,10 @@ dependencies:
   simple_barcode_scanner: ^0.2.0
   mobile_scanner: ^6.0.2
   image_picker: ^1.1.2
-
+  camera_android_camerax: ^0.6.12
+  camera: ^0.11.0+2
+  http: ^1.2.2
+  gif: ^2.3.0
 
 dev_dependencies:
   flutter_test:

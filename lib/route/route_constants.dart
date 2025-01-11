@@ -1,6 +1,10 @@
 const String homePageRoute = "home_page";
 const String rankPageRoute = "rank_page";
 const String qrPageRoute = "qr_page";
+const String gamePageRoute = "game_page";
+const String cameraPageRoute = "camera_page";
+const String loginPageRoute = "login_page";
+const String gameLoadingPageRoute = "game_loading_page";
 // const String mainNavigatePageRoute = "main_navigate_page";
 // const String creditPageRoute = "credit_page";
 // const String robotPageRoute = "robot_page";

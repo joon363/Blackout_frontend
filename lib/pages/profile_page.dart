@@ -4,7 +4,6 @@ import 'package:bremen/pages/components.dart';
 import 'package:flutter/material.dart';
 import 'package:bremen/Connection/state_manager.dart';
 
-
 class ProfilePage extends StatelessWidget {
   const ProfilePage({super.key});
 
@@ -108,52 +107,53 @@ class _WidgetSwitcherState extends State<WidgetSwitcher> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Flexible(child: ElevatedButton(
-              onPressed: () {
-                setState(() {
-                  selectedButton = 1; // 버튼 1 선택
-                });
-              },
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.transparent,
-                foregroundColor: Colors.transparent,
-                shadowColor: Colors.transparent,
-                elevation: 0,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.zero, // radius 0
+                onPressed: () {
+                  setState(() {
+                      selectedButton = 1; // 버튼 1 선택
+                    }
+                  );
+                },
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.transparent,
+                  foregroundColor: Colors.transparent,
+                  shadowColor: Colors.transparent,
+                  elevation: 0,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.zero, // radius 0
+                  ),
                 ),
-              ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Icon(Icons.person, size: 16, color: selectedButton == 1 ? primaryColor : Colors.grey,),
-                  PText("기본 정보", PFontStyle.body1, selectedButton == 1 ? primaryColor : Colors.grey, semiboldInter)
-                ],
-              ),
-            ),),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Icon(Icons.person, size: 16, color: selectedButton == 1 ? primaryColor : Colors.grey,),
+                    PText("기본 정보", PFontStyle.body1, selectedButton == 1 ? primaryColor : Colors.grey, semiboldInter)
+                  ],
+                ),
+              ),),
             Flexible(child: ElevatedButton(
-              onPressed: () {
-                setState(() {
-                  selectedButton = 2; // 버튼 1 선택
-                });
-              },
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.transparent,
-                foregroundColor: Colors.transparent,
-                shadowColor: Colors.transparent,
-                elevation: 0,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.zero, // radius 0
+                onPressed: () {
+                  setState(() {
+                      selectedButton = 2; // 버튼 1 선택
+                    }
+                  );
+                },
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.transparent,
+                  foregroundColor: Colors.transparent,
+                  shadowColor: Colors.transparent,
+                  elevation: 0,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.zero, // radius 0
+                  ),
                 ),
-              ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Icon(Icons.leaderboard, size: 16, color: selectedButton == 2 ? primaryColor : Colors.grey,),
-                  PText("랭크", PFontStyle.body1, selectedButton == 2 ? primaryColor : Colors.grey, semiboldInter)
-                ],
-              ),
-            ),),
-
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Icon(Icons.leaderboard, size: 16, color: selectedButton == 2 ? primaryColor : Colors.grey,),
+                    PText("랭크", PFontStyle.body1, selectedButton == 2 ? primaryColor : Colors.grey, semiboldInter)
+                  ],
+                ),
+              ),),
 
           ],
         ),
@@ -313,7 +313,6 @@ class RankCard extends StatelessWidget{
             )
           ],
         )
-
 
       ],
     );

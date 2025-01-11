@@ -2,8 +2,6 @@ import 'package:bremen/themes.dart';
 import 'package:flutter/material.dart';
 import 'package:bremen/Connection/state_manager.dart';
 
-
-
 class RankPage extends StatelessWidget {
   const RankPage({super.key});
 
@@ -11,24 +9,24 @@ class RankPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final globalState = Provider.of<GlobalState>(context, listen: false);
     return Scaffold(
-        appBar: AppBar(
-          scrolledUnderElevation: 0,
-          backgroundColor: Colors.white,
-          foregroundColor: Colors.white,
-          centerTitle: true,
-          title: PText(globalState.userRank, PFontStyle.headline1, textBlackColor, semiboldInter),
-          leading: IconButton(
-            icon: Icon(
-              Icons.arrow_back_ios,
-              size: 24,
-              color: Colors.black,
-            ),
-            onPressed: () {
-              Navigator.pop(context);  // 뒤로 가기
-            },
+      appBar: AppBar(
+        scrolledUnderElevation: 0,
+        backgroundColor: Colors.white,
+        foregroundColor: Colors.white,
+        centerTitle: true,
+        title: PText(globalState.userRank, PFontStyle.headline1, textBlackColor, semiboldInter),
+        leading: IconButton(
+          icon: Icon(
+            Icons.arrow_back_ios,
+            size: 24,
+            color: Colors.black,
           ),
+          onPressed: () {
+            Navigator.pop(context);  // 뒤로 가기
+          },
         ),
-        body: Padding(padding: EdgeInsets.all(defaultPadding),
+      ),
+      body: Padding(padding: EdgeInsets.all(defaultPadding),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           spacing: defaultPadding/2,
@@ -38,7 +36,7 @@ class RankPage extends StatelessWidget {
               decoration: BoxDecoration(
                 color:primaryColorLight,
                 borderRadius: BorderRadius.all(
-                    Radius.circular(defaultBorderRadius)),
+                  Radius.circular(defaultBorderRadius)),
               ),
               child: PText("랭크별 혜택 안내", PFontStyle.body2, primaryColor, semiboldInter),
             ),
@@ -61,7 +59,7 @@ class RankPage extends StatelessWidget {
                             decoration: BoxDecoration(
                               color: globalState.userRankIndex==index? primaryColorLight: boxGrayColor, // 배경색 (이미지 로드 안 됐을 때 표시)
                               borderRadius: BorderRadius.circular(
-                                  defaultBorderRadius), // 모서리를 둥글게
+                                defaultBorderRadius), // 모서리를 둥글게
                               image: DecorationImage(
                                 image: Image.asset(RankInfo.imgSrcs[index]).image,
                                 // 로컬 이미지 경로

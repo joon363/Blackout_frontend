@@ -37,39 +37,38 @@ const double defaultBorderRadius = 12.0;
 const Duration defaultDuration = Duration(milliseconds: 300);
 const double defaultElevation = 6.0;
 
-
 class PText extends Text {
   PText(
-      super.data,
-      PFontStyle style,
-      Color color,
-      FontWeight weight,
-      {
-        super.key,
-        TextDecoration decoration = TextDecoration.none
-      }) : super(
+    super.data,
+    PFontStyle style,
+    Color color,
+    FontWeight weight,
+    {
+      super.key,
+      TextDecoration decoration = TextDecoration.none
+    }) : super(
       style: PTextStyle(
         color,
         style,
         weight,
         decoration: decoration,
       )
-  );
+    );
 }
 
 class PTextStyle extends TextStyle {
   PTextStyle(
-      Color color,
-      PFontStyle style,
-      FontWeight weight,
-      {TextDecoration decoration = TextDecoration.none}
-      ) : super(
+    Color color,
+    PFontStyle style,
+    FontWeight weight,
+    {TextDecoration decoration = TextDecoration.none}
+  ) : super(
       fontFamily: "Inter",
       color: color,
       fontSize: style.size,
       fontWeight: weight,
       decoration: decoration
-  );
+    );
 }
 
 const FontWeight boldInter = FontWeight.w900;
@@ -107,31 +106,31 @@ class PFontStyle {
 BoxDecoration primaryBox = BoxDecoration(
   color: primaryColor,
   borderRadius: BorderRadius.all(
-      Radius.circular(defaultBorderRadius)),
+    Radius.circular(defaultBorderRadius)),
   border: Border.all(color: primaryColor, width: 2),
 );
 
 BoxDecoration secondaryBox = BoxDecoration(
   color: Colors.white,
   borderRadius: BorderRadius.all(
-      Radius.circular(defaultBorderRadius)),
+    Radius.circular(defaultBorderRadius)),
   border: Border.all(color: primaryColor, width: 2),
 );
 
 BoxDecoration grayBox = BoxDecoration(
   color: boxGrayColor,
   borderRadius: BorderRadius.all(
-      Radius.circular(defaultBorderRadius)),
+    Radius.circular(defaultBorderRadius)),
 );
 
 BoxDecoration whiteBox = BoxDecoration(
   color: Colors.white,
   borderRadius: BorderRadius.all(
-      Radius.circular(defaultBorderRadius)),
+    Radius.circular(defaultBorderRadius)),
 );
 
 BoxDecoration blueBox = BoxDecoration(
   color: boxBlueColor,
   borderRadius: BorderRadius.all(
-      Radius.circular(defaultBorderRadius)),
+    Radius.circular(defaultBorderRadius)),
 );

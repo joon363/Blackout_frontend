@@ -10,7 +10,7 @@ class BarcodeScannerWithOverlay extends StatefulWidget {
 
   @override
   State<BarcodeScannerWithOverlay> createState() =>
-      _BarcodeScannerWithOverlayState();
+  _BarcodeScannerWithOverlayState();
 }
 
 class _BarcodeScannerWithOverlayState extends State<BarcodeScannerWithOverlay> {
@@ -55,8 +55,8 @@ class _BarcodeScannerWithOverlayState extends State<BarcodeScannerWithOverlay> {
             valueListenable: controller,
             builder: (context, value, child) {
               if (!value.isInitialized ||
-                  !value.isRunning ||
-                  value.error != null) {
+                !value.isRunning ||
+                value.error != null) {
                 return const SizedBox();
               }
 
@@ -79,7 +79,14 @@ class _BarcodeScannerWithOverlayState extends State<BarcodeScannerWithOverlay> {
                     ToggleFlashlightButton(controller: controller),
                   ],
                 ),
-                ExitButton(),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: [
+                    ExitButton(),
+                    DebugContinueButton(),
+                  ],
+                ),
                 SizedBox(height: defaultPadding*2,)
 
               ]
@@ -114,18 +121,18 @@ class ScannerOverlay extends CustomPainter {
   void paint(Canvas canvas, Size size) {
     // we need to pass the size to the custom paint widget
     final backgroundPath = Path()
-      ..addRect(Rect.fromLTWH(0, 0, size.width, size.height));
+    ..addRect(Rect.fromLTWH(0, 0, size.width, size.height));
 
     final cutoutPath = Path()
-      ..addRRect(
-        RRect.fromRectAndCorners(
-          scanWindow,
-          topLeft: Radius.circular(borderRadius),
-          topRight: Radius.circular(borderRadius),
-          bottomLeft: Radius.circular(borderRadius),
-          bottomRight: Radius.circular(borderRadius),
-        ),
-      );
+    ..addRRect(
+      RRect.fromRectAndCorners(
+        scanWindow,
+        topLeft: Radius.circular(borderRadius),
+        topRight: Radius.circular(borderRadius),
+        bottomLeft: Radius.circular(borderRadius),
+        bottomRight: Radius.circular(borderRadius),
+      ),
+    );
 
     final backgroundPaint = Paint()
       ..color = Colors.black45
@@ -142,7 +149,6 @@ class ScannerOverlay extends CustomPainter {
       ..color = primaryColor
       ..style = PaintingStyle.stroke
       ..strokeWidth = 4.0;
-
 
     canvas.drawPath(backgroundWithCutout, backgroundPaint);
     // 스캔 윈도우의 꺾쇠를 그림
@@ -207,6 +213,6 @@ class ScannerOverlay extends CustomPainter {
   @override
   bool shouldRepaint(ScannerOverlay oldDelegate) {
     return scanWindow != oldDelegate.scanWindow ||
-        borderRadius != oldDelegate.borderRadius;
+      borderRadius != oldDelegate.borderRadius;
   }
 }

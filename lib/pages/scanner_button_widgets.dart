@@ -1,7 +1,9 @@
+import 'package:bremen/route/route_constants.dart';
 import 'package:bremen/themes.dart';
 import 'package:flutter/material.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:camera/camera.dart';
 
 class ExitButton extends StatelessWidget {
   const ExitButton({super.key});
@@ -18,6 +20,28 @@ class ExitButton extends StatelessWidget {
       ),
       onPressed: () async {
         Navigator.pop(context);
+      },
+    );
+  }
+}
+class DebugContinueButton extends StatelessWidget {
+  const DebugContinueButton({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return IconButton(
+      color: Colors.white,
+      //iconSize: 32.0,
+      icon: CircleAvatar(
+        radius: 30, // 원의 반지름
+        backgroundColor: Colors.white, // 하얀 배경
+        child: Icon(CupertinoIcons.arrow_right, size: 30, color: primaryColor)
+      ),
+      onPressed: () async {
+        Navigator.pushReplacementNamed(
+          context,
+          gameLoadingPageRoute,
+        );
       },
     );
   }
@@ -191,13 +215,33 @@ class ToggleFlashlightButton extends StatelessWidget {
               ],
             );
           case TorchState.unavailable:
-            return const SizedBox.square(
-              dimension: 48.0,
-              child: Icon(
-                Icons.no_flash,
-                size: 32.0,
-                color: Colors.grey,
-              ),
+            return Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                // 하얀 원
+                IconButton(
+                  color: Colors.white,
+                  //iconSize: 32.0,
+                  icon: CircleAvatar(
+                    radius: 30, // 원의 반지름
+                    backgroundColor: Colors.white, // 하얀 배경
+                    child: Padding(
+                      padding: const EdgeInsets.all(10.0), // 이미지 패딩
+                      child: Icon(
+                        Icons.no_flash,
+                        size: 32.0,
+                        color: Colors.grey,
+                      ),
+                    ),
+                  ),
+                  onPressed: () async {
+                    await controller.toggleTorch();
+                  },
+                ),
+
+                //SizedBox(height: 10), // 이미지와 텍스트 사이 간격
+                PText("라이트 없음", PFontStyle.label, textGrayColor, regularInter),
+              ],
             );
         }
       },

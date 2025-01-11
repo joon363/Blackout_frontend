@@ -20,7 +20,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     final globalState = Provider.of<GlobalState>(context, listen: false);
     return Scaffold(
-        body: SingleChildScrollView(
+      body: SingleChildScrollView(
         child: Padding(
           padding: EdgeInsets.all(defaultPadding),
           child: Column(
@@ -36,18 +36,18 @@ class _HomePageState extends State<HomePage> {
 
               // notice
               Container(
-                  decoration: blueBox,
-                  height: 53,
-                  padding: EdgeInsets.symmetric(horizontal: defaultPadding),
-                  alignment: Alignment.centerLeft,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      PText("게임에서 미션 달성시, 할인쿠폰 지급🎉", PFontStyle.label,
-                          textBlackColor, regularInter),
-                      Icon(Icons.arrow_forward_ios, size: 12)
-                    ],
-                  )),
+                decoration: blueBox,
+                height: 53,
+                padding: EdgeInsets.symmetric(horizontal: defaultPadding),
+                alignment: Alignment.centerLeft,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    PText("게임에서 미션 달성시, 할인쿠폰 지급🎉", PFontStyle.label,
+                      textBlackColor, regularInter),
+                    Icon(Icons.arrow_forward_ios, size: 12)
+                  ],
+                )),
 
               // profile card
               Material(
@@ -77,7 +77,6 @@ class _HomePageState extends State<HomePage> {
                         );
                       }
                     );
-                    print("what");
                   },
                   child: Container(
                     //height: 140,
@@ -94,12 +93,12 @@ class _HomePageState extends State<HomePage> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 PText(
-                                    "${globalState.userName}님이 ",
-                                    PFontStyle.headline1,
-                                    textBlackColor,
-                                    boldInter),
+                                  "${globalState.userName}님이 ",
+                                  PFontStyle.headline1,
+                                  textBlackColor,
+                                  boldInter),
                                 PText("도로를 구한 시간 ", PFontStyle.headline1,
-                                    textBlackColor, boldInter),
+                                  textBlackColor, boldInter),
                               ],
                             ),
                             ProfileImage(),
@@ -111,7 +110,6 @@ class _HomePageState extends State<HomePage> {
                   ),
                 ),
               ),
-
 
               // map, qr
               Row(
@@ -126,7 +124,7 @@ class _HomePageState extends State<HomePage> {
                           decoration: BoxDecoration(
                             color: Colors.grey, // 배경색 (이미지 로드 안 됐을 때 표시)
                             borderRadius: BorderRadius.circular(
-                                defaultBorderRadius), // 모서리를 둥글게
+                              defaultBorderRadius), // 모서리를 둥글게
                             image: DecorationImage(
                               image: Image.asset('assets/images/map.png').image,
                               // 로컬 이미지 경로
@@ -149,7 +147,10 @@ class _HomePageState extends State<HomePage> {
                             color: Colors.transparent,
                             child: InkWell(
                               highlightColor: Colors.white10,
-                              onTap: () {print("fuck");},
+
+                              onTap: () {
+                                print("haha it does nothing~~");
+                              }
                             ),
                           ),
                         ),
@@ -165,7 +166,7 @@ class _HomePageState extends State<HomePage> {
                           decoration: BoxDecoration(
                             color: Colors.grey, // 배경색 (이미지 로드 안 됐을 때 표시)
                             borderRadius: BorderRadius.circular(
-                                defaultBorderRadius), // 모서리를 둥글게
+                              defaultBorderRadius), // 모서리를 둥글게
                             image: DecorationImage(
                               image: Image.asset('assets/images/qr.png').image,
                               // 로컬 이미지 경로
@@ -189,23 +190,6 @@ class _HomePageState extends State<HomePage> {
                             child: InkWell(
                               highlightColor: Colors.white10,
                               onTap: () async {
-                                // TODO: activate on release
-                                // String? res = await SimpleBarcodeScanner.scanBarcode(
-                                //   context,
-                                //   barcodeAppBar: const BarcodeAppBar(
-                                //     appBarTitle: 'QR Scan',
-                                //     centerTitle: false,
-                                //     enableBackButton: true,
-                                //     backButtonIcon: Icon(Icons.arrow_back_ios),
-                                //   ),
-                                //   isShowFlashIcon: true,
-                                //   delayMillis: 2000,
-                                //   cameraFace: CameraFace.back,
-                                // );
-                                setState(() {
-                                  // TODO: activate on release
-                                  // globalState.setQrResult(res as String);
-                                });
                                 Navigator.pushNamed(
                                   context,
                                   qrPageRoute,
@@ -227,47 +211,47 @@ class _HomePageState extends State<HomePage> {
                 spacing: defaultPadding,
                 children: [
                   Expanded(
-                      child: Container(
-                    padding: EdgeInsets.all(defaultPadding),
-                    decoration: grayBox,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Icon(
-                          CupertinoIcons.question_circle_fill,
-                          color: primaryColor,
-                          size: 24,
-                        ),
-                        PText("서비스 안내", PFontStyle.label, textBlackColor,
+                    child: Container(
+                      padding: EdgeInsets.all(defaultPadding),
+                      decoration: grayBox,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Icon(
+                            CupertinoIcons.question_circle_fill,
+                            color: primaryColor,
+                            size: 24,
+                          ),
+                          PText("서비스 안내", PFontStyle.label, textBlackColor,
                             regularInter)
-                      ],
-                    ),
-                  )),
+                        ],
+                      ),
+                    )),
                   Expanded(
-                      child: Container(
-                    padding: EdgeInsets.all(defaultPadding),
-                    decoration: grayBox,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Icon(
-                          Icons.headset_mic_rounded,
-                          color: primaryColor,
-                          size: 24,
-                        ),
-                        PText("고객센터", PFontStyle.label, textBlackColor,
+                    child: Container(
+                      padding: EdgeInsets.all(defaultPadding),
+                      decoration: grayBox,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Icon(
+                            Icons.headset_mic_rounded,
+                            color: primaryColor,
+                            size: 24,
+                          ),
+                          PText("고객센터", PFontStyle.label, textBlackColor,
                             regularInter)
-                      ],
-                    ),
-                  )
+                        ],
+                      ),
+                    )
                   ),
                 ],
               )
             ],
           )
-      )
+        )
 
-    )
+      )
     );
   }
 }

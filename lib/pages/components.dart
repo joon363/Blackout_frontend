@@ -61,9 +61,9 @@ class RankIndicator extends StatelessWidget {
         Row(
           children: [
             PText(globalState.userRank, PFontStyle.label, primaryColor,
-                semiboldInter),
+              semiboldInter),
             PText(" (다음 랭크까지 ${globalState.getRemainExp()}EXP)",
-                PFontStyle.label, textGrayColor, semiboldInter)
+              PFontStyle.label, textGrayColor, semiboldInter)
           ],
         ),
         SizedBox(
