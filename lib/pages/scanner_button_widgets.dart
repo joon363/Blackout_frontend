@@ -3,6 +3,8 @@ import 'package:bremen/themes.dart';
 import 'package:flutter/material.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
 import 'package:flutter/cupertino.dart';
+export 'package:provider/provider.dart';
+import 'package:bremen/Connection/state_manager.dart';
 
 class ExitButton extends StatelessWidget {
   const ExitButton({super.key});
@@ -28,6 +30,7 @@ class DebugContinueButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final globalState = Provider.of<GlobalState>(context, listen: true);
     return IconButton(
       color: Colors.white,
       //iconSize: 32.0,
@@ -37,10 +40,12 @@ class DebugContinueButton extends StatelessWidget {
         child: Icon(CupertinoIcons.arrow_right, size: 30, color: primaryColor)
       ),
       onPressed: () async {
-        Navigator.pushReplacementNamed(
-          context,
-          gameLoadingPageRoute,
-        );
+        if(globalState.getQR()!="") {
+          Navigator.pushReplacementNamed(
+            context,
+            gameLoadingPageRoute,
+          );
+        }
       },
     );
   }

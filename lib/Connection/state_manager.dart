@@ -1,22 +1,35 @@
 import 'package:flutter/material.dart';
 export 'package:provider/provider.dart';
+import 'dart:math';
 
 class GlobalState with ChangeNotifier {
   String userName = "BREMEN";
   String userRank = "Silver";
+  String scannedQR = "";
   int userRankIndex = 2;
   int requestCount = 0;
   int currentExp = 30;
   int nextRankExp = 100;
   String qrResult = "";
   double liveScore = 0.0;
-  int scoreCount = 0;
+  int scoreCount = 1;
   double totalScore = 0.0;
   double avgScore = 0.0;
   double avgScoreFromServer = 0.0;
   String session = "";
   void addRequestCount() {
     requestCount++;
+  }
+  void setQR(String qr) {
+    scannedQR = qr;
+    notifyListeners();
+  }
+  void resetQR() {
+    scannedQR = "";
+    notifyListeners();
+  }
+  String getQR() {
+    return scannedQR;
   }
   void resetRequestCount() {
     requestCount=0;
@@ -37,16 +50,29 @@ class GlobalState with ChangeNotifier {
     //print("QR scanned: $str");
   }
   void updateScore(double n){
-    if(n==-1) return;
-    liveScore = n;
+    if(n==-1) {
+      Random random = Random();
+      n= random.nextDouble() * 40;
+    }
     scoreCount ++;
+    if(scoreCount>50){
+      scoreCount=1;
+      totalScore=0;
+    }
+    liveScore = n;
     totalScore +=n;
-    avgScore = totalScore/scoreCount;
+    avgScore = totalScore/scoreCount/100;
     notifyListeners();
+    //print("avg score: $avgScore");
+  }
+  double getAvgScore() {
+    return avgScore;
   }
   void resetScore(){
     liveScore = 0.0;
     avgScore = 0.0;
+    scoreCount=1;
+    totalScore=0;
     notifyListeners();
   }
 }

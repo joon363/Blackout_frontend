@@ -32,7 +32,20 @@ class _HomePageState extends State<HomePage> {
                 height: defaultPadding,
               ),
               // GCOO text
-              PText("GCOO", PFontStyle.display1, primaryColor, semiboldInter),
+              //PText("GCOO", PFontStyle.display1, primaryColor, semiboldInter),
+              Container(
+                  height: 40,
+                  padding: EdgeInsets.symmetric(horizontal: defaultPadding),
+                  alignment: Alignment.centerLeft,
+                  decoration: BoxDecoration(
+                    color: Colors.transparent,
+                    image: DecorationImage(
+                      image: Image.asset('assets/images/logo.png').image,
+                      // 로컬 이미지 경로
+                      fit: BoxFit.scaleDown,
+                    ),
+                  ),
+              ),
 
               // notice
               Container(

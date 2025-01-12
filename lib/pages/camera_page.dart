@@ -172,10 +172,10 @@ class _CameraPageState extends State<CameraPage> {
 
     Future<void> pollData(BuildContext context) async {
       final globalState = Provider.of<GlobalState>(context, listen: false);
-      globalState.resetScore();
-      globalState.resetRequestCount();
-      await screenshot(context);
       if(!isPolling){
+        await screenshot(context);
+        globalState.resetScore();
+        globalState.resetRequestCount();
         isPolling = true;
         Timer timer = Timer.periodic(Duration(seconds: 1), (timer) async {
             await screenshot(context);
@@ -192,7 +192,7 @@ class _CameraPageState extends State<CameraPage> {
         pollData(context);
       }
     );
-    final globalState = Provider.of<GlobalState>(context, listen: false);
+    final globalState = Provider.of<GlobalState>(context, listen: true);
     Color getProgressColor(double progress) {
       // 프로그레스 값이 0일 때 빨간색, 100일 때 초록색으로 변하도록 설정
       int red = ((1 - progress) * 255).toInt();  // 빨간색은 0에서 255로 감소
@@ -200,7 +200,9 @@ class _CameraPageState extends State<CameraPage> {
       return Color.fromRGBO(red, green, 0, 1); // 빨간색, 초록색, 파란색 값 설정
     }
     double getValue(){
-      return offset+globalState.avgScore > 1 ? 1:offset+globalState.avgScore;
+      double value = offset+globalState.getAvgScore() > 1 ? 1:offset+globalState.getAvgScore();
+      //print(value);
+      return value;
     }
     double barWidth = MediaQuery.of(context).size.width - 32;
     return PopScope(

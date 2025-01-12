@@ -4,6 +4,8 @@ import 'package:bremen/pages/scanner_barcode_label.dart';
 import 'package:bremen/pages/scanner_button_widgets.dart';
 import 'package:bremen/pages/scanner_error_widget.dart';
 import 'package:bremen/themes.dart';
+export 'package:provider/provider.dart';
+import 'package:bremen/Connection/state_manager.dart';
 
 class QRPage extends StatefulWidget {
   const QRPage({super.key});
@@ -20,6 +22,8 @@ class _QRPageState extends State<QRPage> {
 
   @override
   Widget build(BuildContext context) {
+    final globalState = Provider.of<GlobalState>(context, listen: true);
+    globalState.resetQR();
     final scanWindow = Rect.fromCenter(
       center: MediaQuery.sizeOf(context).center(Offset.zero),
       width: 200,
@@ -84,7 +88,7 @@ class _QRPageState extends State<QRPage> {
                   crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
                     ExitButton(),
-                    //DebugContinueButton(),
+                    DebugContinueButton(),
                   ],
                 ),
                 SizedBox(height: defaultPadding*2,)
