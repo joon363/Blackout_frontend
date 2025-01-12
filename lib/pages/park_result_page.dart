@@ -2,7 +2,6 @@ import 'package:bremen/route/route_constants.dart';
 import 'package:flutter/material.dart';
 import 'package:bremen/Connection/state_manager.dart';
 import 'package:bremen/themes.dart';
-import 'package:bremen/pages/components.dart';
 
 class ParkResultPage extends StatefulWidget {
   const ParkResultPage({super.key});
@@ -12,7 +11,7 @@ class ParkResultPage extends StatefulWidget {
 }
 
 class _ParkResultPageState extends State<ParkResultPage>
-with SingleTickerProviderStateMixin {
+  with SingleTickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
@@ -130,16 +129,16 @@ with SingleTickerProviderStateMixin {
                               Navigator.pushReplacementNamed(context, rideResultPageRoute);
                             },
                             child: Container(
-                                alignment: Alignment.center,
-                                width: 150,
-                                height: 40,
-                                decoration: BoxDecoration(
-                                  //color: primaryColor,
-                                  borderRadius: BorderRadius.all(
-                                      Radius.circular(999)),
-                                  border: Border.all(color: primaryColor, width: 2),
-                                ),
-                                child: PText("NEXT", PFontStyle.headline2, primaryColor, regularInter),
+                              alignment: Alignment.center,
+                              width: 150,
+                              height: 40,
+                              decoration: BoxDecoration(
+                                //color: primaryColor,
+                                borderRadius: BorderRadius.all(
+                                  Radius.circular(999)),
+                                border: Border.all(color: primaryColor, width: 2),
+                              ),
+                              child: PText("NEXT", PFontStyle.headline2, primaryColor, regularInter),
                             ),
                           ),
                         ),

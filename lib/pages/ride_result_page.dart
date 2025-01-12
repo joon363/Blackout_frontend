@@ -2,7 +2,6 @@ import 'package:bremen/route/route_constants.dart';
 import 'package:flutter/material.dart';
 import 'package:bremen/Connection/state_manager.dart';
 import 'package:bremen/themes.dart';
-import 'package:bremen/pages/components.dart';
 
 class RideResultPage extends StatefulWidget {
   const RideResultPage({super.key});
@@ -12,7 +11,7 @@ class RideResultPage extends StatefulWidget {
 }
 
 class _RideResultPageState extends State<RideResultPage>
-with SingleTickerProviderStateMixin {
+  with SingleTickerProviderStateMixin {
   late AnimationController _controller;
   late Animation<double> _animation;
   @override
@@ -157,16 +156,16 @@ with SingleTickerProviderStateMixin {
                               Navigator.pushReplacementNamed(context, rankResultPageRoute);
                             },
                             child: Container(
-                                alignment: Alignment.center,
-                                width: 150,
-                                height: 40,
-                                decoration: BoxDecoration(
-                                  //color: primaryColor,
-                                  borderRadius: BorderRadius.all(
-                                      Radius.circular(999)),
-                                  border: Border.all(color: primaryColor, width: 2),
-                                ),
-                                child: PText("NEXT", PFontStyle.headline2, primaryColor, regularInter),
+                              alignment: Alignment.center,
+                              width: 150,
+                              height: 40,
+                              decoration: BoxDecoration(
+                                //color: primaryColor,
+                                borderRadius: BorderRadius.all(
+                                  Radius.circular(999)),
+                                border: Border.all(color: primaryColor, width: 2),
+                              ),
+                              child: PText("NEXT", PFontStyle.headline2, primaryColor, regularInter),
                             ),
                           ),
                         ),

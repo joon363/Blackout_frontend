@@ -2,7 +2,6 @@ import 'package:bremen/route/route_constants.dart';
 import 'package:flutter/material.dart';
 import 'package:bremen/Connection/state_manager.dart';
 import 'package:bremen/themes.dart';
-import 'package:bremen/pages/components.dart';
 
 class RankResultPage extends StatefulWidget {
   const RankResultPage({super.key});
@@ -12,7 +11,7 @@ class RankResultPage extends StatefulWidget {
 }
 
 class _RankResultPageState extends State<RankResultPage>{
-  String _imagePath = 'assets/images/beforerank.png';
+  final String _imagePath = 'assets/images/beforerank.png';
   bool _showFirst = true;
   @override
   void initState() {
@@ -152,12 +151,12 @@ class _RankResultPageState extends State<RankResultPage>{
                             textAlign: TextAlign.center,
                           ),
                           Padding(padding: EdgeInsets.all(defaultPadding),
-                              child:LinearProgressIndicator(
-                                value: 0.05, // 애니메이션 값에 따라 진행
-                                minHeight: 10,
-                                backgroundColor: Colors.grey[300],
-                                color: primaryColor,
-                              )
+                            child:LinearProgressIndicator(
+                              value: 0.05, // 애니메이션 값에 따라 진행
+                              minHeight: 10,
+                              backgroundColor: Colors.grey[300],
+                              color: primaryColor,
+                            )
                           ),
                           Material(
                             elevation: 0,
@@ -176,7 +175,7 @@ class _RankResultPageState extends State<RankResultPage>{
                                 decoration: BoxDecoration(
                                   //color: primaryColor,
                                   borderRadius: BorderRadius.all(
-                                      Radius.circular(999)),
+                                    Radius.circular(999)),
                                   border: Border.all(color: primaryColor, width: 2),
                                 ),
                                 child: PText("OK", PFontStyle.headline2, primaryColor, regularInter),

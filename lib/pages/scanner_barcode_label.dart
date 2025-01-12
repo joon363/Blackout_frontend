@@ -1,6 +1,7 @@
 import 'package:bremen/themes.dart';
 import 'package:flutter/material.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
+import 'package:bremen/route/route_constants.dart';
 
 class ScannedBarcodeLabel extends StatelessWidget {
   const ScannedBarcodeLabel({
@@ -19,7 +20,11 @@ class ScannedBarcodeLabel extends StatelessWidget {
       builder: (context, snapshot) {
         final scannedBarcodes = snapshot.data?.barcodes ?? [];
 
-        if (scannedBarcodes.isEmpty) {
+        if (scannedBarcodes.isNotEmpty) {
+          Navigator.pushReplacementNamed(
+            context,
+            gameLoadingPageRoute,
+          );
           return PText(text, PFontStyle.headline2, textWhiteColor, semiboldInter);
         }
 

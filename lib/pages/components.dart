@@ -32,8 +32,8 @@ class ProfileImage extends StatelessWidget {
     for(int i=0;i<names.length;i++) {
       precacheImage(
         Image
-            .asset(names[i])
-            .image,
+          .asset(names[i])
+          .image,
         context,
       );
     }

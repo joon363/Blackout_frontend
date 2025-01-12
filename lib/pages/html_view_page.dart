@@ -3,6 +3,8 @@ import 'package:webview_flutter/webview_flutter.dart';
 import 'package:bremen/themes.dart';
 
 class WebViewPage extends StatefulWidget {
+  const WebViewPage({super.key});
+
   @override
   State<WebViewPage> createState() => _WebViewPageState();
 }
@@ -14,8 +16,8 @@ class _WebViewPageState extends State<WebViewPage> {
   void initState() {
     super.initState();
     controller = WebViewController()
-      ..setJavaScriptMode(JavaScriptMode.unrestricted)
-      ..loadRequest(Uri.parse('https://minhjih.github.io/micro-processor/service_area_analysis.html'));
+    ..setJavaScriptMode(JavaScriptMode.unrestricted)
+    ..loadRequest(Uri.parse('https://minhjih.github.io/micro-processor/service_area_analysis.html'));
   }
 
   @override

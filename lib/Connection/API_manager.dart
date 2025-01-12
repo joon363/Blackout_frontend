@@ -12,6 +12,8 @@ const String backendBaseUrl = "http://ec2-3-80-116-226.compute-1.amazonaws.com:5
 const String bearerToken = "test-token";
 
 class LoginPage extends StatefulWidget {
+  const LoginPage({super.key});
+
   @override
   _LoginPageState createState() => _LoginPageState();
 }
@@ -39,9 +41,9 @@ class _LoginPageState extends State<LoginPage> {
 
     try {
       final response = await dio.post(
-          "$backendBaseUrl/login",
-          data: body,
-          options: Options(headers: headers), 
+        "$backendBaseUrl/login",
+        data: body,
+        options: Options(headers: headers), 
       );
 
       if (response.statusCode == 200) {
@@ -51,8 +53,8 @@ class _LoginPageState extends State<LoginPage> {
         globalState.session = sessionCookie.value;
         print(globalState.session);
         Navigator.pushReplacementNamed(
-            context,
-            homePageRoute
+          context,
+          homePageRoute
         );
 
       }
@@ -107,7 +109,7 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        resizeToAvoidBottomInset: false,
+      resizeToAvoidBottomInset: false,
       body: Stack(
         children: [
           Container(
@@ -177,7 +179,9 @@ class _LoginPageState extends State<LoginPage> {
                   spacing: defaultPadding,
                   children: [
                     ElevatedButton(
-                      onPressed: (){login(context);},
+                      onPressed: (){
+                        login(context);
+                      },
                       child: PText("로그인", PFontStyle.label, primaryColor, semiboldInter),
                     ),
                     ElevatedButton(
@@ -195,8 +199,8 @@ class _LoginPageState extends State<LoginPage> {
             child: ElevatedButton(
               onPressed: () {
                 Navigator.pushReplacementNamed(
-                    context,
-                    homePageRoute
+                  context,
+                  homePageRoute
                 );
               },
               style: ElevatedButton.styleFrom(

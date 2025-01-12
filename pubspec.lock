@@ -90,7 +90,7 @@ packages:
     source: hosted
     version: "1.19.0"
   cookie_jar:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: cookie_jar
       sha256: a6ac027d3ed6ed756bfce8f3ff60cb479e266f3b0fdabd6242b804b6765e52de
@@ -130,7 +130,7 @@ packages:
     source: hosted
     version: "1.0.8"
   dio:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: dio
       sha256: "5598aa796bbf4699afd5c67c0f5f6e2ed542afc956884b9cd58c306966efc260"

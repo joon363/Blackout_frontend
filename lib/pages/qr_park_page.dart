@@ -47,7 +47,7 @@ class _QRParkPageState extends State<QRParkPage> {
                   child: Align(
                     alignment: Alignment.topCenter,
                     child: ScannedBarcodeLabel(barcodes: controller.barcodes,
-                    text: '올바르게 주차되어 있는지 확인해 주세요.',),
+                      text: '올바르게 주차되어 있는지 확인해 주세요.',),
                   ),
                 );
               },
@@ -88,12 +88,12 @@ class _QRParkPageState extends State<QRParkPage> {
                       color: Colors.white,
                       //iconSize: 32.0,
                       icon: CircleAvatar(
-                          radius: 30, // 원의 반지름
-                          backgroundColor: Colors.white, // 하얀 배경
-                          child: Icon(CupertinoIcons.arrow_right, size: 30, color: primaryColor)
+                        radius: 30, // 원의 반지름
+                        backgroundColor: Colors.white, // 하얀 배경
+                        child: Icon(CupertinoIcons.arrow_right, size: 30, color: primaryColor)
                       ),
                       onPressed: () async {
-                        final image = await controller.returnImage;
+                        final image = controller.returnImage;
                         Navigator.pushReplacementNamed(
                           context,
                           resultLoadingPageRoute,

@@ -47,6 +47,8 @@ dependencies:
   image:
   video_player: ^2.9.2
 
+  cookie_jar: any
+  dio: any
 dev_dependencies:
   flutter_test:
     sdk: flutter

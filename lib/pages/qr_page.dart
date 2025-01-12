@@ -84,7 +84,7 @@ class _QRPageState extends State<QRPage> {
                   crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
                     ExitButton(),
-                    DebugContinueButton(),
+                    //DebugContinueButton(),
                   ],
                 ),
                 SizedBox(height: defaultPadding*2,)

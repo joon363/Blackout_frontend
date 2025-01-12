@@ -1,10 +1,7 @@
 import 'package:bremen/route/route_constants.dart';
 import 'package:bremen/themes.dart';
 import 'package:flutter/material.dart';
-import 'package:bremen/Connection/state_manager.dart';
-import 'dart:io';
 import 'package:camera/camera.dart';
-import 'package:flutter/material.dart';
 
 class ResultLoadingPage extends StatefulWidget {
   const ResultLoadingPage({super.key});

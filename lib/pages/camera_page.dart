@@ -1,22 +1,15 @@
-import 'dart:convert';
 
 import 'package:bremen/route/route_constants.dart';
 import 'package:camera/camera.dart';
-import 'package:image/image.dart' as img;
 import 'package:flutter/material.dart';
 import 'package:bremen/Connection/state_manager.dart';
 import 'dart:async';
-import 'dart:io';
-import 'package:camera/camera.dart';
-import 'package:flutter/material.dart';
 import 'package:bremen/themes.dart';
-import 'package:bremen/classes.dart';
 import 'package:bremen/Connection/API_manager.dart';
 import 'package:dio_cookie_manager/dio_cookie_manager.dart';
 import 'package:cookie_jar/cookie_jar.dart';
 import 'package:dio/dio.dart';
 
-import 'package:http/http.dart' as http;
 const String _backendBaseUrl = "http://ec2-3-80-116-226.compute-1.amazonaws.com:5000";
 const String _bearerToken = "test-token";
 
@@ -32,8 +25,8 @@ const dummyResponse = {
     "top_y": 1.5
   },
   "coins": [
-    {"x": 1.0, "y": 2.0, "r": 0.3},
-    {"x": 1.5, "y": 2.5, "r": 0.4}
+  {"x": 1.0, "y": 2.0, "r": 0.3},
+  {"x": 1.5, "y": 2.5, "r": 0.4}
   ]
 };
 
@@ -110,7 +103,7 @@ class _CameraPageState extends State<CameraPage> {
         final formData = FormData.fromMap({
           'frame': await MultipartFile.fromFile(imagePath),
           'frame_id': globalState.requestCount,
-          }
+        }
         );
         globalState.addRequestCount();
 
@@ -136,7 +129,7 @@ class _CameraPageState extends State<CameraPage> {
         }
       }
       catch (e) {
-        print("image upload error: ${e}");
+        print("image upload error: $e");
         return 0.0;
       }
     }
@@ -182,21 +175,20 @@ class _CameraPageState extends State<CameraPage> {
         }
       }
       catch (e) {
-        print("ride end request error: ${e}");
+        print("ride end request error: $e");
       }
     }
 
-
     Future<void> screenshot(BuildContext context) async {
-        try {
-          if (!context.mounted) return;
-          final image = await controller.takePicture();
-          double res = await uploadImage(context,image.path);
-        } catch (e) {
-          print("error while screenshot: $e");
-        }
+      try {
+        if (!context.mounted) return;
+        final image = await controller.takePicture();
+        double res = await uploadImage(context,image.path);
+      }
+      catch (e) {
+        print("error while screenshot: $e");
+      }
     }
-
 
     Future<void> pollData(BuildContext context) async {
       final globalState = Provider.of<GlobalState>(context, listen: false);
@@ -206,19 +198,20 @@ class _CameraPageState extends State<CameraPage> {
       if(!isPolling){
         isPolling = true;
         Timer timer = Timer.periodic(Duration(seconds: 1), (timer) async {
-          await screenshot(context);
-        });
+            await screenshot(context);
+          }
+        );
       }
     }
-
 
     if (!controller.value.isInitialized) {
       return Container();
     }
 
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      pollData(context);
-    });
+        pollData(context);
+      }
+    );
     final globalState = Provider.of<GlobalState>(context, listen: false);
     Color getProgressColor(double progress) {
       // 프로그레스 값이 0일 때 빨간색, 100일 때 초록색으로 변하도록 설정
@@ -259,7 +252,7 @@ class _CameraPageState extends State<CameraPage> {
                   decoration: BoxDecoration(
                     color: Colors.white54,
                     borderRadius: BorderRadius.all(
-                        Radius.circular(defaultBorderRadius)),
+                      Radius.circular(defaultBorderRadius)),
                   ),
                   child: LinearProgressIndicator(
                     value: getValue(), // 프로그레스 바 값 설정
@@ -267,7 +260,7 @@ class _CameraPageState extends State<CameraPage> {
                     backgroundColor: Colors.transparent,
                     color: getProgressColor(getValue()),
                     borderRadius: BorderRadius.all(
-                        Radius.circular(defaultBorderRadius)),
+                      Radius.circular(defaultBorderRadius)),
                   ),
                 ),
                 Positioned(

@@ -3,7 +3,6 @@ import 'package:bremen/themes.dart';
 import 'package:flutter/material.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:camera/camera.dart';
 
 class ExitButton extends StatelessWidget {
   const ExitButton({super.key});
@@ -55,9 +54,9 @@ class DebugParkContinueButton extends StatelessWidget {
       color: Colors.white,
       //iconSize: 32.0,
       icon: CircleAvatar(
-          radius: 30, // 원의 반지름
-          backgroundColor: Colors.white, // 하얀 배경
-          child: Icon(CupertinoIcons.arrow_right, size: 30, color: primaryColor)
+        radius: 30, // 원의 반지름
+        backgroundColor: Colors.white, // 하얀 배경
+        child: Icon(CupertinoIcons.arrow_right, size: 30, color: primaryColor)
       ),
       onPressed: () async {
         Navigator.pushReplacementNamed(

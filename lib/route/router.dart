@@ -28,11 +28,11 @@ Route<dynamic> generateRoute(RouteSettings settings) {
         builder: (context) => const QRParkPage(),
       );
     case cameraPageRoute:
-      final List<CameraDescription> _cameras = settings.arguments as List<CameraDescription>;
+      final List<CameraDescription> cameras = settings.arguments as List<CameraDescription>;
       //
       return MaterialPageRoute(
         settings: RouteSettings(name: cameraPageRoute),
-        builder: (context) => CameraPage(cameras: _cameras),
+        builder: (context) => CameraPage(cameras: cameras),
       );
     case fakeCameraPageRoute:
       return MaterialPageRoute(
