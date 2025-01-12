@@ -34,7 +34,7 @@ class GlobalState with ChangeNotifier {
   }
   void setQrResult(String str) {
     qrResult = str;
-    print("QR scanned: $str");
+    //print("QR scanned: $str");
   }
   void updateScore(double n){
     if(n==-1) return;

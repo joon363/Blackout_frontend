@@ -11,12 +11,10 @@ class RankResultPage extends StatefulWidget {
 }
 
 class _RankResultPageState extends State<RankResultPage>{
-  final String _imagePath = 'assets/images/beforerank.png';
   bool _showFirst = true;
   @override
   void initState() {
     super.initState();
-
     // 2초 후에 이미지 변경
     Future.delayed(Duration(seconds: 1), () {
         setState(() {

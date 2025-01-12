@@ -79,66 +79,6 @@ Route<dynamic> generateRoute(RouteSettings settings) {
         settings: RouteSettings(name: rankResultPageRoute),
         builder: (context) => RankResultPage(),
       );
-      return PageRouteBuilder(
-        pageBuilder: (context, animation, secondaryAnimation) => RankResultPage(),
-        transitionsBuilder: (context, animation, secondaryAnimation, child) {
-          const begin = Offset(1.0, 0.0); // 새 화면이 오른쪽에서 시작
-          const end = Offset.zero;        // 새 화면이 제자리로 이동
-          const curve = Curves.easeInOut;
-
-          var tween = Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
-          var offsetAnimation = animation.drive(tween);
-
-          return SlideTransition(
-            position: offsetAnimation,
-            child: child,
-          );
-        },
-      );
-    // case missionPageRoute:
-    //   return MaterialPageRoute(
-    //     settings: RouteSettings(name: missionPageRoute),
-    //     builder: (context) => const MissionPage(),
-    //   );
-    // case missionDetailRoute:
-    //   final String missionId = settings.arguments as String;
-    //   return MaterialPageRoute(
-    //     settings: RouteSettings(name: missionDetailRoute),
-    //     builder: (context) => MissionDetailPage(missionId: missionId),
-    //   );
-    // case deliveryInputPageRoute:
-    //   return MaterialPageRoute(
-    //     settings: RouteSettings(name: deliveryInputPageRoute),
-    //     builder: (context) => const DeliveryInputPage(),
-    //   );
-    // case deliveryCallingPageRoute:
-    //   final missionRequestArgument argument = settings.arguments as missionRequestArgument;
-    //   return MaterialPageRoute(
-    //     settings: RouteSettings(name: deliveryCallingPageRoute),
-    //     builder: (context) => DeliveryCallingPage(requestInfo: argument,),
-    //   );
-    // case deliveryFailPageRoute:
-    //   final data = settings.arguments as Map<String, dynamic>;
-    //   return MaterialPageRoute(
-    //     settings: RouteSettings(name: deliveryFailPageRoute),
-    //     builder: (context) => DeliveryFailPage(requestInfo: data['requestInfo'], errorMessage: data['errorMessage']),
-    //   );
-    // case deliverySuccessPageRoute:
-    //   final data = settings.arguments as Map<String, dynamic>;
-    //   return MaterialPageRoute(
-    //     settings: RouteSettings(name: deliverySuccessPageRoute),
-    //     builder: (context) => DeliverySuccessPage(requestInfo: data['requestInfo'],objectId: data['objectId'], missionId: data['missionId'],),
-    //   );
-    // case statusPageRoute:
-    //   return MaterialPageRoute(
-    //     settings: RouteSettings(name: statusPageRoute),
-    //     builder: (context) => const StatusPage(),
-    //   );
-    // case loginLoadingPageRoute:
-    //   return MaterialPageRoute(
-    //     settings: RouteSettings(name: loginLoadingPageRoute),
-    //     builder: (context) => LoginLoadingPage(),
-    //   );
     default:
     return MaterialPageRoute(
       settings: RouteSettings(name: homePageRoute),

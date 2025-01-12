@@ -15,7 +15,7 @@ class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
 
   @override
-  _LoginPageState createState() => _LoginPageState();
+  State<LoginPage> createState() => _LoginPageState();
 }
 
 class _LoginPageState extends State<LoginPage> {
@@ -28,7 +28,7 @@ class _LoginPageState extends State<LoginPage> {
     final cookieJar = CookieJar();
     dio.interceptors.add(CookieManager(cookieJar));
 
-    final url = Uri.parse("$backendBaseUrl/login"); // 서버 URL
+    Uri.parse("$backendBaseUrl/login"); // 서버 URL
     final headers = {
       'Content-Type': 'application/json',
       'Authorization': 'Bearer $bearerToken', // Bearer Token 추가
@@ -47,11 +47,11 @@ class _LoginPageState extends State<LoginPage> {
       );
 
       if (response.statusCode == 200) {
-        print("set-cookie: ${response.headers['set-cookie']}");
+        //print("set-cookie: ${response.headers['set-cookie']}");
         final cookies = await cookieJar.loadForRequest(Uri.parse("$backendBaseUrl/login"));
         final sessionCookie = cookies.firstWhere((cookie) => cookie.name == 'session');
         globalState.session = sessionCookie.value;
-        print(globalState.session);
+        //print(globalState.session);
         Navigator.pushReplacementNamed(
           context,
           homePageRoute
@@ -61,11 +61,11 @@ class _LoginPageState extends State<LoginPage> {
       else {
         // 로그인 실패
         final errorData = response.data;
-        print("로그인 실패: ${errorData['error']}");
+        //print("로그인 실패: ${errorData['error']}");
       }
     }
     catch (e) {
-      print("오류 발생: $e");
+      //print("오류 발생: $e");
     }
   }
   Future<void> _register() async {
@@ -84,20 +84,15 @@ class _LoginPageState extends State<LoginPage> {
       final response = await http.post(url, headers: headers, body: body);
 
       if (response.statusCode == 201) {
-        // 로그인 성공
-        final data = jsonDecode(response.body);
-        print("회원가입 성공");
+        //print("회원가입 성공");
       }
       else {
-        // 로그인 실패
         final errorData = jsonDecode(response.body);
-        print("회원가입 실패");
+        //print("회원가입 실패");
       }
     }
     catch (e) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text("오류 발생: $e")),
-      );
+      //print("오류 발생: $e");
     }
   }
   @override
@@ -117,7 +112,6 @@ class _LoginPageState extends State<LoginPage> {
               color: Colors.grey, // 배경색 (이미지 로드 안 됐을 때 표시)
               borderRadius: BorderRadius.circular(defaultBorderRadius), // 모서리를 둥글게
               image: DecorationImage(
-                //colorFilter: ColorFilter.mode(Colors.black45, BlendMode.darken),
                 image: Image.asset('assets/images/login_cover.png').image,
                 // 로컬 이미지 경로
                 fit: BoxFit.cover, // 이미지를 박스 크기에 맞게 자르기

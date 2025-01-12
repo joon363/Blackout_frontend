@@ -10,26 +10,6 @@ import 'package:dio_cookie_manager/dio_cookie_manager.dart';
 import 'package:cookie_jar/cookie_jar.dart';
 import 'package:dio/dio.dart';
 
-const String _backendBaseUrl = "http://ec2-3-80-116-226.compute-1.amazonaws.com:5000";
-const String _bearerToken = "test-token";
-
-const dummyResponse = {
-  "score": 98.5,
-  "frame_id": 1234567890,
-  "road_outline": {
-    "bottom_x_r": 0.5,
-    "bottom_x_s": 0.6,
-    "bottom_y": 1.0,
-    "top_x_r": 0.7,
-    "top_x_s": 0.8,
-    "top_y": 1.5
-  },
-  "coins": [
-  {"x": 1.0, "y": 2.0, "r": 0.3},
-  {"x": 1.5, "y": 2.5, "r": 0.4}
-  ]
-};
-
 class CameraPage extends StatefulWidget {
   /// Default Constructor
   const CameraPage({super.key, required this.cameras});
@@ -118,18 +98,18 @@ class _CameraPageState extends State<CameraPage> {
           //Future.delayed(Duration(milliseconds: 50));
           final data = response.data;
           final result = data['score'];
-          print("image uploaded, score: $result");
+          //print("image uploaded, score: $result");
           globalState.updateScore(result);
 
           return result;
         }
         else {
-          print("image upload fail: ${response.statusCode}");
+          //print("image upload fail: ${response.statusCode}");
           return 0.0;
         }
       }
       catch (e) {
-        print("image upload error: $e");
+        //print("image upload error: $e");
         return 0.0;
       }
     }
@@ -165,17 +145,17 @@ class _CameraPageState extends State<CameraPage> {
         final statusCode = response.statusCode;
         if (statusCode==200) {
           //Future.delayed(Duration(milliseconds: 50));
-          print("ride ended");
+          //print("ride ended");
           final data = response.data;
           final result = data['average_point'];
           globalState.updateScore(result);
         }
         else {
-          print("ride end fail: ${response.statusCode}");
+          //print("ride end fail: ${response.statusCode}");
         }
       }
       catch (e) {
-        print("ride end request error: $e");
+        //print("ride end request error: $e");
       }
     }
 
@@ -186,7 +166,7 @@ class _CameraPageState extends State<CameraPage> {
         double res = await uploadImage(context,image.path);
       }
       catch (e) {
-        print("error while screenshot: $e");
+        //print("error while screenshot: $e");
       }
     }
 

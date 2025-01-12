@@ -1,6 +1,5 @@
 import 'package:bremen/route/route_constants.dart';
 import 'package:flutter/material.dart';
-import 'package:bremen/Connection/state_manager.dart';
 import 'package:bremen/themes.dart';
 
 class ParkResultPage extends StatefulWidget {
@@ -15,7 +14,6 @@ class _ParkResultPageState extends State<ParkResultPage>
 
   @override
   Widget build(BuildContext context) {
-    final globalState = Provider.of<GlobalState>(context, listen: false);
     return Stack(
       alignment: Alignment.center,
       children: [
