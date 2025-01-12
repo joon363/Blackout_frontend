@@ -1,3 +1,4 @@
+import 'package:bremen/pages/result_loading_page.dart';
 import 'package:bremen/pages/ride_result_page.dart';
 import 'package:flutter/material.dart';
 import 'package:bremen/pages/pages.dart';
@@ -48,17 +49,31 @@ Route<dynamic> generateRoute(RouteSettings settings) {
         settings: RouteSettings(name: parkLoadingPageRoute),
         builder: (context) => ParkLoadingPage(),
       );
+    case resultLoadingPageRoute:
+      return MaterialPageRoute(
+        settings: RouteSettings(name: resultLoadingPageRoute),
+        builder: (context) => ResultLoadingPage(),
+      );
     case htmlViewPageRoute:
       return MaterialPageRoute(
         settings: RouteSettings(name: htmlViewPageRoute),
-        builder: (context) => LocalHtmlPage(),
+        builder: (context) => WebViewPage(),
       );
     case rideResultPageRoute:
       return MaterialPageRoute(
         settings: RouteSettings(name: rideResultPageRoute),
         builder: (context) => RideResultPage(),
       );
+    case parkResultPageRoute:
+      return MaterialPageRoute(
+        settings: RouteSettings(name: parkResultPageRoute),
+        builder: (context) => ParkResultPage(),
+      );
     case rankResultPageRoute:
+      return MaterialPageRoute(
+        settings: RouteSettings(name: rankResultPageRoute),
+        builder: (context) => RankResultPage(),
+      );
       return PageRouteBuilder(
         pageBuilder: (context, animation, secondaryAnimation) => RankResultPage(),
         transitionsBuilder: (context, animation, secondaryAnimation, child) {

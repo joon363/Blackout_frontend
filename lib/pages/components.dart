@@ -17,6 +17,7 @@ const List<String> names = [
   'assets/images/qr.png',
   'assets/images/rankup.png',
   'assets/images/scooter_badge.png',
+  'assets/images/scooter_park.png',
   'assets/images/silver.png',
   'assets/images/stars.png',
   'assets/images/tree_badge.png',

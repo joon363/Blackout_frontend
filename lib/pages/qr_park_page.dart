@@ -4,7 +4,8 @@ import 'package:bremen/pages/scanner_barcode_label.dart';
 import 'package:bremen/pages/scanner_button_widgets.dart';
 import 'package:bremen/pages/scanner_error_widget.dart';
 import 'package:bremen/themes.dart';
-
+import 'package:bremen/route/route_constants.dart';
+import 'package:flutter/cupertino.dart';
 class QRParkPage extends StatefulWidget {
   const QRParkPage({super.key});
 
@@ -83,7 +84,22 @@ class _QRParkPageState extends State<QRParkPage> {
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
-                    DebugParkContinueButton(),
+                    IconButton(
+                      color: Colors.white,
+                      //iconSize: 32.0,
+                      icon: CircleAvatar(
+                          radius: 30, // 원의 반지름
+                          backgroundColor: Colors.white, // 하얀 배경
+                          child: Icon(CupertinoIcons.arrow_right, size: 30, color: primaryColor)
+                      ),
+                      onPressed: () async {
+                        final image = await controller.returnImage;
+                        Navigator.pushReplacementNamed(
+                          context,
+                          resultLoadingPageRoute,
+                        );
+                      },
+                    ),
                   ],
                 ),
                 SizedBox(height: defaultPadding*2,)

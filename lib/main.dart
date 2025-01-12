@@ -24,7 +24,7 @@ class MyApp extends StatelessWidget {
       title: 'Bremen',
       theme: AppTheme.lightTheme(context),
       onGenerateRoute: router.generateRoute,
-      initialRoute: homePageRoute,
+      initialRoute: loginPageRoute,
     );
   }
 }

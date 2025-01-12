@@ -1,15 +1,24 @@
+import 'dart:convert';
+
 import 'package:bremen/route/route_constants.dart';
 import 'package:camera/camera.dart';
+import 'package:image/image.dart' as img;
 import 'package:flutter/material.dart';
+import 'package:bremen/Connection/state_manager.dart';
 import 'dart:async';
 import 'dart:io';
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:bremen/themes.dart';
 import 'package:bremen/classes.dart';
+import 'package:bremen/Connection/API_manager.dart';
+import 'package:dio_cookie_manager/dio_cookie_manager.dart';
+import 'package:cookie_jar/cookie_jar.dart';
+import 'package:dio/dio.dart';
 
 import 'package:http/http.dart' as http;
-
+const String _backendBaseUrl = "http://ec2-3-80-116-226.compute-1.amazonaws.com:5000";
+const String _bearerToken = "test-token";
 
 const dummyResponse = {
   "score": 98.5,
@@ -76,22 +85,46 @@ class _CameraPageState extends State<CameraPage> {
   @override
   Widget build(BuildContext context) {
     Future<double> uploadImage(BuildContext context, String imagePath) async {
+
+      final globalState = Provider.of<GlobalState>(context, listen: false);
+
+      // 서버 URL
+      final url = "$backendBaseUrl/video_frame";
+
       try {
-        // final uri = Uri.parse("http://10.0.2.2/upload"); // 서버 URL
-        // final request = http.MultipartRequest('POST', uri);
-        // // 파일 추가
-        // request.files.add(
-        //   await http.MultipartFile.fromPath('file', imagePath),
-        // );
-        // // 요청 전송
-        // final response = await request.send();
-        // final statusCode = response.statusCode;
-        if (true) {
-          Future.delayed(Duration(milliseconds: 50));
-          print("image uploaded");
-          //final data = jsonDecode(response.body);
-          final data = RoadData.fromJson(dummyResponse);
-          return data.score;
+        final dio = Dio();
+
+        // 쿠키 관리 객체 설정
+        final cookieJar = CookieJar();
+        dio.interceptors.add(CookieManager(cookieJar));
+
+        // 세션 쿠키 생성
+        final sessionCookie = Cookie('session', globalState.session)
+          ..domain = Uri.parse(url).host  // 쿠키의 domain 설정 (url에 맞게 설정)
+          ..path = '/'                    // 쿠키의 path 설정
+          ..httpOnly = true;               // HTTP 요청에서만 사용하도록 설정 (브라우저 접근 불가)
+
+        // 쿠키를 CookieJar에 추가
+        await cookieJar.saveFromResponse(Uri.parse(url), [sessionCookie]);
+        // 멀티파트 데이터 생성
+        final formData = FormData.fromMap({
+          'frame': await MultipartFile.fromFile(imagePath),
+          'frame_id': 0,
+        }
+        );
+
+        // 요청 보내기
+        final response = await dio.post(
+          url,
+          data: formData,
+        );
+
+        final statusCode = response.statusCode;
+        if (statusCode==200) {
+          //Future.delayed(Duration(milliseconds: 50));
+          //print("image uploaded");
+          final data = response.data;
+          return data['score'];
         }
         else {
           //print("image upload fail: ${response.statusCode}");
@@ -103,6 +136,7 @@ class _CameraPageState extends State<CameraPage> {
         return 0.0;
       }
     }
+
 
     Future<void> screenshot(BuildContext context) async {
         try {
@@ -117,13 +151,15 @@ class _CameraPageState extends State<CameraPage> {
 
 
     Future<void> pollData(BuildContext context) async {
-      if(!isPolling){
-        isPolling = true;
-        Timer timer = Timer.periodic(Duration(seconds: 3), (timer) async {
-          print("fuck");
-          await screenshot(context);
-        });
-      }
+
+      await screenshot(context);
+      // if(!isPolling){
+      //   isPolling = true;
+      //   Timer timer = Timer.periodic(Duration(seconds: 3), (timer) async {
+      //     print("fuck");
+      //     await screenshot(context);
+      //   });
+      // }
     }
 
 

@@ -12,6 +12,7 @@ class GlobalState with ChangeNotifier {
   int scoreCount = 0;
   double totalScore = 0.0;
   double avgScore = 0.0;
+  String session = "";
 
   Future<void> updateUserRank(String newRank) async {
     userRank = newRank;
