@@ -6,6 +6,7 @@ const List<String> names = [
   'assets/images/bronze.png',
   'assets/images/bulb.png',
   'assets/images/city.png',
+  'assets/images/fire.png',
   'assets/images/gold.png',
   'assets/images/iron.png',
   'assets/images/map.png',

@@ -50,6 +50,10 @@ class _LoginPageState extends State<LoginPage> {
         final sessionCookie = cookies.firstWhere((cookie) => cookie.name == 'session');
         globalState.session = sessionCookie.value;
         print(globalState.session);
+        Navigator.pushReplacementNamed(
+            context,
+            homePageRoute
+        );
 
       }
       else {
@@ -80,17 +84,12 @@ class _LoginPageState extends State<LoginPage> {
       if (response.statusCode == 201) {
         // 로그인 성공
         final data = jsonDecode(response.body);
-        print(data);
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text("로그인 성공: ${data['message']}")),
-        );
+        print("회원가입 성공");
       }
       else {
         // 로그인 실패
         final errorData = jsonDecode(response.body);
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text("로그인 실패: ${errorData['error']}")),
-        );
+        print("회원가입 실패");
       }
     }
     catch (e) {

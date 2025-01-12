@@ -5,6 +5,7 @@ export 'package:bremen/pages/rank_page.dart';
 export 'package:bremen/pages/qr_page.dart';
 export 'package:bremen/pages/qr_park_page.dart';
 export 'package:bremen/pages/camera_page.dart';
+export 'package:bremen/pages/fake_camera_page.dart';
 export 'package:bremen/pages/game_loading_page.dart';
 export 'package:bremen/pages/park_loading_page.dart';
 export 'package:bremen/pages/park_result_page.dart';

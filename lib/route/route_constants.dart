@@ -4,6 +4,7 @@ const String qrPageRoute = "qr_page";
 const String qrParkPageRoute = "qr_park_page";
 const String gamePageRoute = "game_page";
 const String cameraPageRoute = "camera_page";
+const String fakeCameraPageRoute = "fake_camera_page";
 const String loginPageRoute = "login_page";
 const String gameLoadingPageRoute = "game_loading_page";
 const String parkLoadingPageRoute = "park_loading_page";

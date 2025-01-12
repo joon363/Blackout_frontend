@@ -34,6 +34,11 @@ Route<dynamic> generateRoute(RouteSettings settings) {
         settings: RouteSettings(name: cameraPageRoute),
         builder: (context) => CameraPage(cameras: _cameras),
       );
+    case fakeCameraPageRoute:
+      return MaterialPageRoute(
+        settings: RouteSettings(name: fakeCameraPageRoute),
+        builder: (context) => FakeCameraPage(),
+      );
     case loginPageRoute:
       return MaterialPageRoute(
         settings: RouteSettings(name: loginPageRoute),
