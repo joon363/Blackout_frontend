@@ -80,8 +80,7 @@ class PFontStyle {
 
   // private 생성자
   const PFontStyle._(this.size);
-  static const PFontStyle display1 = PFontStyle._(40.0);
-  static const PFontStyle display2 = PFontStyle._(32.0);
+  static const PFontStyle display = PFontStyle._(32.0);
   static const PFontStyle title1 = PFontStyle._(28.0);
   static const PFontStyle title2 = PFontStyle._(24.0);
   static const PFontStyle headline1 = PFontStyle._(20.0);
@@ -90,47 +89,4 @@ class PFontStyle {
   static const PFontStyle body2 = PFontStyle._(15.0);
   static const PFontStyle label = PFontStyle._(14.0);
   static const PFontStyle caption1 = PFontStyle._(12.0);
-  static const PFontStyle caption2 = PFontStyle._(11.0);
 }
-
-// class CustomIcon {
-//   CustomIcon._();
-//
-//   static const _kFontFam = 'CustomIcon';
-//   static const String? _kFontPkg = null;
-//
-//   static const IconData progressIcon = IconData(0xe801, fontFamily: _kFontFam, fontPackage: _kFontPkg);
-//   static const IconData robotIcon = IconData(0xe802, fontFamily: _kFontFam, fontPackage: _kFontPkg);
-// }
-
-BoxDecoration primaryBox = BoxDecoration(
-  color: primaryColor,
-  borderRadius: BorderRadius.all(
-    Radius.circular(defaultBorderRadius)),
-  border: Border.all(color: primaryColor, width: 2),
-);
-
-BoxDecoration secondaryBox = BoxDecoration(
-  color: Colors.white,
-  borderRadius: BorderRadius.all(
-    Radius.circular(defaultBorderRadius)),
-  border: Border.all(color: primaryColor, width: 2),
-);
-
-BoxDecoration grayBox = BoxDecoration(
-  color: boxGrayColor,
-  borderRadius: BorderRadius.all(
-    Radius.circular(defaultBorderRadius)),
-);
-
-BoxDecoration whiteBox = BoxDecoration(
-  color: Colors.white,
-  borderRadius: BorderRadius.all(
-    Radius.circular(defaultBorderRadius)),
-);
-
-BoxDecoration blueBox = BoxDecoration(
-  color: boxBlueColor,
-  borderRadius: BorderRadius.all(
-    Radius.circular(defaultBorderRadius)),
-);

@@ -44,7 +44,7 @@ class _ResultLoadingPageState extends State<ResultLoadingPage> {
               height: 300,
               decoration: BoxDecoration(
                 color: Colors.transparent, // 배경색 (이미지 로드 안 됐을 때 표시)
-                borderRadius: BorderRadius.circular(defaultBorderRadius), // 모서리를 둥글게
+                borderRadius: BorderRadius.circular(defaultBorderRadius), 
                 image: DecorationImage(
                   image: AssetImage('assets/images/blocks.gif'),
                   // 로컬 이미지 경로

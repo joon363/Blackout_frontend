@@ -1,9 +1,8 @@
 import 'package:bremen/themes.dart';
 import 'package:flutter/material.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
-import 'package:bremen/route/route_constants.dart';
 export 'package:provider/provider.dart';
-import 'package:bremen/Connection/state_manager.dart';
+import 'package:bremen/State/state_manager.dart';
 
 class ScannedBarcodeLabel extends StatelessWidget {
   const ScannedBarcodeLabel({
@@ -24,7 +23,12 @@ class ScannedBarcodeLabel extends StatelessWidget {
         final scannedBarcodes = snapshot.data?.barcodes ?? [];
 
         if (scannedBarcodes.isEmpty) {
-          return PText(text, PFontStyle.headline2, textWhiteColor, semiboldInter);
+          return Column(
+            children: [
+              PText(text, PFontStyle.headline2, textWhiteColor, semiboldInter),
+              PText("hint: 아무 QR이나 스캔해 보세요", PFontStyle.label, textWhiteColor, semiboldInter)
+            ],
+          );
         }
 
         if (scannedBarcodes.first.displayValue!=null){

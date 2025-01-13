@@ -1,17 +1,15 @@
-
 import 'package:bremen/route/route_constants.dart';
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
-import 'package:bremen/Connection/state_manager.dart';
+import 'package:bremen/State/state_manager.dart';
 import 'dart:async';
 import 'package:bremen/themes.dart';
-import 'package:bremen/Connection/API_manager.dart';
+import 'package:bremen/pages/login/login_page.dart';
 import 'package:dio_cookie_manager/dio_cookie_manager.dart';
 import 'package:cookie_jar/cookie_jar.dart';
 import 'package:dio/dio.dart';
 
 class CameraPage extends StatefulWidget {
-  /// Default Constructor
   const CameraPage({super.key, required this.cameras});
   final List<CameraDescription> cameras;
   @override
@@ -37,14 +35,29 @@ class _CameraPageState extends State<CameraPage> {
       }
     ).catchError((Object e) {
           if (e is CameraException) {
-            switch (e.code) {
-              case 'CameraAccessDenied':
-                // Handle access errors here.
-                break;
-              default:
-              // Handle other errors here.
-              break;
-            }
+            showDialog(
+              context: context,
+              barrierDismissible: true,
+              builder: (BuildContext context){
+                return SizedBox(
+                  child: AlertDialog(
+                    title: PText('카메라에 문제가 생겼습니다.', PFontStyle.headline2,textBlackColor, semiboldInter),
+                    content: PText('이전 화면으로 돌아갑니다.', PFontStyle.label,textBlackColor, semiboldInter),
+                    actions: [
+                      TextButton(
+                        onPressed: () {
+                          Navigator.pushReplacementNamed(
+                            context,
+                            homePageRoute
+                          );
+                        },
+                        child: PText('확인', PFontStyle.headline2,primaryColor, semiboldInter),
+                      ),
+                    ],
+                  ),
+                );
+              }
+            );
           }
         }
       );
@@ -56,17 +69,15 @@ class _CameraPageState extends State<CameraPage> {
     controller.dispose();
     super.dispose();
   }
+
   @override
   Widget build(BuildContext context) {
     Future<double> uploadImage(BuildContext context, String imagePath) async {
       final globalState = Provider.of<GlobalState>(context, listen: false);
-
-      // 서버 URL
       final url = "$backendBaseUrl/video_frame";
 
       try {
         final dio = Dio();
-
         // 쿠키 관리 객체 설정
         final cookieJar = CookieJar();
         dio.interceptors.add(CookieManager(cookieJar));
@@ -80,13 +91,14 @@ class _CameraPageState extends State<CameraPage> {
         // 쿠키를 CookieJar에 추가
         await cookieJar.saveFromResponse(Uri.parse(url), [sessionCookie]);
         // 멀티파트 데이터 생성
-        final formData = FormData.fromMap({
+        final formData = FormData.fromMap(
+        {
           'frame': await MultipartFile.fromFile(imagePath),
           'frame_id': globalState.requestCount,
         }
         );
-        globalState.addRequestCount();
 
+        globalState.addRequestCount();
         // 요청 보내기
         final response = await dio.post(
           url,
@@ -95,28 +107,22 @@ class _CameraPageState extends State<CameraPage> {
 
         final statusCode = response.statusCode;
         if (statusCode==200) {
-          //Future.delayed(Duration(milliseconds: 50));
           final data = response.data;
           final result = data['score'];
-          //print("image uploaded, score: $result");
           globalState.updateScore(result);
-
           return result;
         }
         else {
-          //print("image upload fail: ${response.statusCode}");
           return 0.0;
         }
       }
       catch (e) {
-        //print("image upload error: $e");
         return 0.0;
       }
     }
+
     Future<void> endRide(BuildContext context) async {
       final globalState = Provider.of<GlobalState>(context, listen: false);
-
-      // 서버 URL
       final url = "$backendBaseUrl/endride";
 
       try {
@@ -144,8 +150,6 @@ class _CameraPageState extends State<CameraPage> {
 
         final statusCode = response.statusCode;
         if (statusCode==200) {
-          //Future.delayed(Duration(milliseconds: 50));
-          //print("ride ended");
           final data = response.data;
           final result = data['average_point'];
           globalState.updateScore(result);
@@ -193,18 +197,21 @@ class _CameraPageState extends State<CameraPage> {
       }
     );
     final globalState = Provider.of<GlobalState>(context, listen: true);
+
     Color getProgressColor(double progress) {
       // 프로그레스 값이 0일 때 빨간색, 100일 때 초록색으로 변하도록 설정
-      int red = ((1 - progress) * 255).toInt();  // 빨간색은 0에서 255로 감소
-      int green = (progress * 255).toInt(); // 초록색은 0에서 255로 증가
-      return Color.fromRGBO(red, green, 0, 1); // 빨간색, 초록색, 파란색 값 설정
+      int red = ((1 - progress) * 255).toInt();
+      int green = (progress * 255).toInt();
+      return Color.fromRGBO(red, green, 0, 1);
     }
+
     double getValue(){
       double value = offset+globalState.getAvgScore() > 1 ? 1:offset+globalState.getAvgScore();
-      //print(value);
       return value;
     }
+
     double barWidth = MediaQuery.of(context).size.width - 32;
+
     return PopScope(
       canPop: false,
       onPopInvokedWithResult: (bool didPop, Object? result) async {
@@ -233,30 +240,26 @@ class _CameraPageState extends State<CameraPage> {
                   width: double.infinity,
                   decoration: BoxDecoration(
                     color: Colors.white54,
-                    borderRadius: BorderRadius.all(
-                      Radius.circular(defaultBorderRadius)),
-                  ),
+                    borderRadius: BorderRadius.circular(defaultBorderRadius)),
                   child: LinearProgressIndicator(
-                    value: getValue(), // 프로그레스 바 값 설정
+                    value: getValue(),
                     minHeight: 10,
                     backgroundColor: Colors.transparent,
                     color: getProgressColor(getValue()),
-                    borderRadius: BorderRadius.all(
-                      Radius.circular(defaultBorderRadius)),
-                  ),
+                    borderRadius: BorderRadius.circular(defaultBorderRadius)),
                 ),
                 Positioned(
-                  left: (getValue()-offset / 100) * (barWidth-32) +16, // 진행 값에 따른 아이콘 위치
-                  top: 100, // 아이콘을 프로그레스 바 위로 띄움
+                  left: (getValue()-offset / 100) * (barWidth-32) +16,
+                  top: 100,
                   child: Container(
                     height: 40,
                     width: 40,
                     decoration: BoxDecoration(
-                      color: Colors.transparent, // 배경색 (이미지 로드 안 됐을 때 표시)
+                      color: Colors.transparent,
                       image: DecorationImage(
                         image: Image.asset('assets/images/fire.png').image,
                         // 로컬 이미지 경로
-                        fit: BoxFit.cover, // 이미지를 박스 크기에 맞게 자르기
+                        fit: BoxFit.cover,
                       ),
                     ),
                   ),
@@ -271,7 +274,11 @@ class _CameraPageState extends State<CameraPage> {
               child: Container(
                 height: 80,
                 width: 200,
-                decoration: primaryBox,
+                decoration: BoxDecoration(
+                  color: primaryColor,
+                  borderRadius: BorderRadius.circular((defaultBorderRadius)),
+                  border: Border.all(color: primaryColor, width: 2),
+                ),
                 alignment: Alignment.center,
                 child: Material(
                   elevation: 0,
@@ -282,7 +289,6 @@ class _CameraPageState extends State<CameraPage> {
                     borderRadius: BorderRadius.circular(defaultBorderRadius),
                     onTap: () async {
                       await endRide(context);
-
                       Navigator.pushReplacementNamed(
                         context,
                         parkLoadingPageRoute,
@@ -292,7 +298,7 @@ class _CameraPageState extends State<CameraPage> {
                       height: 80,
                       width: 200,
                       alignment: Alignment.center,
-                      child: PText("주행 종료", PFontStyle.display2, Colors.white, semiboldInter),
+                      child: PText("주행 종료", PFontStyle.display, Colors.white, semiboldInter),
                     ),
                   ),
                 ),
@@ -303,5 +309,4 @@ class _CameraPageState extends State<CameraPage> {
       )
     );
   }
-
 }

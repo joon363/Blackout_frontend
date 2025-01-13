@@ -14,7 +14,6 @@ class _ParkLoadingPageState extends State<ParkLoadingPage> {
   @override
   void initState() {
     super.initState();
-    // 2초 대기 후 다음 페이지로 이동
     Future.delayed(Duration(seconds: 2), () async {
         WidgetsFlutterBinding.ensureInitialized();
         List<CameraDescription> cameras = await availableCameras();
@@ -45,10 +44,9 @@ class _ParkLoadingPageState extends State<ParkLoadingPage> {
               height: 300,
               decoration: BoxDecoration(
                 color: Colors.transparent, // 배경색 (이미지 로드 안 됐을 때 표시)
-                borderRadius: BorderRadius.circular(defaultBorderRadius), // 모서리를 둥글게
+                borderRadius: BorderRadius.circular(defaultBorderRadius), 
                 image: DecorationImage(
                   image: AssetImage('assets/images/blocks.gif'),
-                  // 로컬 이미지 경로
                   fit: BoxFit.fitHeight, // 이미지를 박스 크기에 맞게 자르기
                 ),
               ),

@@ -1,6 +1,6 @@
 import 'package:bremen/route/route_constants.dart';
 import 'package:flutter/material.dart';
-import 'package:bremen/Connection/state_manager.dart';
+import 'package:bremen/State/state_manager.dart';
 import 'package:bremen/themes.dart';
 
 class RideResultPage extends StatefulWidget {
@@ -50,7 +50,7 @@ class _RideResultPageState extends State<RideResultPage>
         Container(
           decoration: BoxDecoration(
             color: Colors.grey, // 배경색 (이미지 로드 안 됐을 때 표시)
-            borderRadius: BorderRadius.circular(defaultBorderRadius), // 모서리를 둥글게
+            borderRadius: BorderRadius.circular(defaultBorderRadius), 
             image: DecorationImage(
               colorFilter: ColorFilter.mode(Colors.black45, BlendMode.darken),
               image: Image.asset('assets/images/city.png').image,
@@ -64,8 +64,7 @@ class _RideResultPageState extends State<RideResultPage>
           child: Container(
             decoration: BoxDecoration(
               color: Colors.white,
-              borderRadius: BorderRadius.all(
-                Radius.circular(defaultBorderRadius)),
+              borderRadius: BorderRadius.circular(                (defaultBorderRadius)),
             ),
             child: Column(
               mainAxisSize: MainAxisSize.min,
@@ -161,8 +160,7 @@ class _RideResultPageState extends State<RideResultPage>
                               height: 40,
                               decoration: BoxDecoration(
                                 //color: primaryColor,
-                                borderRadius: BorderRadius.all(
-                                  Radius.circular(999)),
+                                borderRadius: BorderRadius.circular(                                  (999)),
                                 border: Border.all(color: primaryColor, width: 2),
                               ),
                               child: PText("NEXT", PFontStyle.headline2, primaryColor, regularInter),

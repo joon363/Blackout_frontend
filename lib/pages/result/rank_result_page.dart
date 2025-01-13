@@ -1,6 +1,6 @@
 import 'package:bremen/route/route_constants.dart';
 import 'package:flutter/material.dart';
-import 'package:bremen/Connection/state_manager.dart';
+import 'package:bremen/State/state_manager.dart';
 import 'package:bremen/themes.dart';
 
 class RankResultPage extends StatefulWidget {
@@ -34,7 +34,7 @@ class _RankResultPageState extends State<RankResultPage>{
         Container(
           decoration: BoxDecoration(
             color: Colors.grey, // 배경색 (이미지 로드 안 됐을 때 표시)
-            borderRadius: BorderRadius.circular(defaultBorderRadius), // 모서리를 둥글게
+            borderRadius: BorderRadius.circular(defaultBorderRadius), 
             image: DecorationImage(
               colorFilter: ColorFilter.mode(Colors.black45, BlendMode.darken),
               image: Image.asset('assets/images/city.png').image,
@@ -54,9 +54,7 @@ class _RankResultPageState extends State<RankResultPage>{
                   height: 600,
                   decoration: BoxDecoration(
                     color: Colors.white,
-                    borderRadius: BorderRadius.all(
-                      Radius.circular(defaultBorderRadius)),
-                  ),
+                    borderRadius: BorderRadius.circular(defaultBorderRadius)),
                 ),
               ),
               Align(
@@ -80,8 +78,7 @@ class _RankResultPageState extends State<RankResultPage>{
                                 width: 120,
                                 decoration: BoxDecoration(
                                   color: Colors.transparent,
-                                  borderRadius: BorderRadius.circular(
-                                    defaultBorderRadius), // 모서리를 둥글게
+                                  borderRadius: BorderRadius.circular(                                    defaultBorderRadius), 
                                   image: DecorationImage(
                                     image: Image.asset('assets/images/silver.png').image,
                                     // 로컬 이미지 경로
@@ -106,8 +103,7 @@ class _RankResultPageState extends State<RankResultPage>{
                                 width: 120,
                                 decoration: BoxDecoration(
                                   color: Colors.transparent,
-                                  borderRadius: BorderRadius.circular(
-                                    defaultBorderRadius), // 모서리를 둥글게
+                                  borderRadius: BorderRadius.circular(                                    defaultBorderRadius), 
                                   image: DecorationImage(
                                     image: Image.asset('assets/images/gold.png').image,
                                     // 로컬 이미지 경로
@@ -128,11 +124,7 @@ class _RankResultPageState extends State<RankResultPage>{
                           child: PText("랭크가 Silver에서 Gold로\n상승했습니다!", PFontStyle.headline2, textBlackColor, boldInter),
                         )
                       ),
-                      Divider(
-                        height: 2,
-                        thickness: 1,
-                        color: Colors.black,
-                      ),
+                      Divider(height: 2),
                       Column(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
@@ -172,8 +164,7 @@ class _RankResultPageState extends State<RankResultPage>{
                                 height: 40,
                                 decoration: BoxDecoration(
                                   //color: primaryColor,
-                                  borderRadius: BorderRadius.all(
-                                    Radius.circular(999)),
+                                  borderRadius: BorderRadius.circular(                                    (999)),
                                   border: Border.all(color: primaryColor, width: 2),
                                 ),
                                 child: PText("OK", PFontStyle.headline2, primaryColor, regularInter),

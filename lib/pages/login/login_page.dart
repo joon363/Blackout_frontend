@@ -1,14 +1,14 @@
 import 'dart:convert';
 import 'package:bremen/route/route_constants.dart';
 import 'package:bremen/themes.dart';
-import 'package:bremen/Connection/state_manager.dart';
+import 'package:bremen/State/state_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:dio_cookie_manager/dio_cookie_manager.dart';
 import 'package:cookie_jar/cookie_jar.dart';
 export 'package:provider/provider.dart';
 import 'package:dio/dio.dart';
-const String backendBaseUrl = "http://ec2-3-80-116-226.compute-1.amazonaws.com:5000";
+const String backendBaseUrl = "sample";//"http://ec2-3-80-116-226.compute-1.amazonaws.com:5000";
 const String bearerToken = "test-token";
 
 class LoginPage extends StatefulWidget {
@@ -44,14 +44,12 @@ class _LoginPageState extends State<LoginPage> {
         "$backendBaseUrl/login",
         data: body,
         options: Options(headers: headers), 
-      );
+      ).timeout(Duration(seconds: 3));
 
       if (response.statusCode == 200) {
-        //print("set-cookie: ${response.headers['set-cookie']}");
-        final cookies = await cookieJar.loadForRequest(Uri.parse("$backendBaseUrl/login"));
+        final cookies = await cookieJar.loadForRequest(Uri.parse("$backendBaseUrl/login")).timeout(Duration(seconds: 3));
         final sessionCookie = cookies.firstWhere((cookie) => cookie.name == 'session');
         globalState.session = sessionCookie.value;
-        //print(globalState.session);
         Navigator.pushReplacementNamed(
           context,
           homePageRoute
@@ -61,11 +59,39 @@ class _LoginPageState extends State<LoginPage> {
       else {
         // 로그인 실패
         final errorData = response.data;
-        //print("로그인 실패: ${errorData['error']}");
+        throw Exception("로그인 실패");
+
+        print("로그인 실패: ${errorData['error']}");
       }
     }
     catch (e) {
-      //print("오류 발생: $e");
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+          showDialog(
+            context: context,
+            builder: (context) => SizedBox(
+              height: 200,
+              child: AlertDialog(
+                title: PText('연결 오류가 발생했습니다.', PFontStyle.headline2,textBlackColor, semiboldInter),
+                content: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    PText('네트워크를 확인하거나, 관리자에게 문의해주세요.', PFontStyle.label,textBlackColor, semiboldInter),
+                    PText('tip: 오른쪽 아래의 skip을 누르세요', PFontStyle.caption1,textBlackColor, regularInter),
+                  ],
+                ),
+                actions: [
+                  TextButton(
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                    child: PText('확인', PFontStyle.headline2,textBlackColor, semiboldInter),
+                  ),
+                ],
+              ),
+            )
+          );
+        }
+      );
     }
   }
   Future<void> _register() async {
@@ -110,7 +136,7 @@ class _LoginPageState extends State<LoginPage> {
           Container(
             decoration: BoxDecoration(
               color: Colors.grey, // 배경색 (이미지 로드 안 됐을 때 표시)
-              borderRadius: BorderRadius.circular(defaultBorderRadius), // 모서리를 둥글게
+              borderRadius: BorderRadius.circular(defaultBorderRadius), 
               image: DecorationImage(
                 image: Image.asset('assets/images/login_cover.png').image,
                 // 로컬 이미지 경로

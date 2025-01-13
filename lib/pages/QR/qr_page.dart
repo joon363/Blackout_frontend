@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
-import 'package:bremen/pages/scanner_barcode_label.dart';
-import 'package:bremen/pages/scanner_button_widgets.dart';
-import 'package:bremen/pages/scanner_error_widget.dart';
+import 'package:bremen/pages/scanner_components/scanner_barcode_label.dart';
+import 'package:bremen/pages/scanner_components/scanner_button_widgets.dart';
+import 'package:bremen/pages/scanner_components/scanner_error_widget.dart';
 import 'package:bremen/themes.dart';
 export 'package:provider/provider.dart';
-import 'package:bremen/Connection/state_manager.dart';
+import 'package:bremen/State/state_manager.dart';
+import 'package:bremen/route/route_constants.dart';
 
 class QRPage extends StatefulWidget {
   const QRPage({super.key});
@@ -30,74 +31,86 @@ class _QRPageState extends State<QRPage> {
       height: 200,
     );
 
-    return Scaffold(
-      backgroundColor: Colors.black,
-      body: Stack(
-        fit: StackFit.expand,
-        children: [
-          Center(
-            child: MobileScanner(
-              fit: BoxFit.contain,
-              controller: controller,
-              scanWindow: scanWindow,
-              errorBuilder: (context, error, child) {
-                return ScannerErrorWidget(error: error);
-              },
-              overlayBuilder: (context, constraints) {
-                /// qr 위 텍스트
-                return Padding(
-                  padding: const EdgeInsets.only(top: defaultPadding*5),
-                  child: Align(
-                    alignment: Alignment.topCenter,
-                    child: ScannedBarcodeLabel(barcodes: controller.barcodes),
-                  ),
+    return PopScope(
+      canPop: false,
+      onPopInvokedWithResult: (bool didPop, Object? result) async {
+        if (didPop) {
+          return;
+        }
+        Navigator.pushReplacementNamed(
+          context,
+          homePageRoute
+        );
+      },
+      child: Scaffold(
+        backgroundColor: Colors.black,
+        body: Stack(
+          //fit: StackFit.expand,
+          children: [
+            Center(
+              child: MobileScanner(
+                fit: BoxFit.contain,
+                controller: controller,
+                scanWindow: scanWindow,
+                errorBuilder: (context, error, child) {
+                  return ScannerErrorWidget(error: error);
+                },
+                overlayBuilder: (context, constraints) {
+                  return Padding(
+                    padding: const EdgeInsets.only(top: defaultPadding*5),
+                    child: Align(
+                      alignment: Alignment.topCenter,
+                      child: ScannedBarcodeLabel(barcodes: controller.barcodes),
+                    ),
+                  );
+                },
+              ),
+            ),
+
+            // qr 스캐너
+            ValueListenableBuilder(
+              valueListenable: controller,
+              builder: (context, value, child) {
+                if (!value.isInitialized ||
+                  !value.isRunning ||
+                  value.error != null) {
+                  return const SizedBox();
+                }
+                return CustomPaint(
+                  painter: ScannerOverlay(scanWindow: scanWindow),
                 );
               },
             ),
-          ),
-          ValueListenableBuilder(
-            valueListenable: controller,
-            builder: (context, value, child) {
-              if (!value.isInitialized ||
-                !value.isRunning ||
-                value.error != null) {
-                return const SizedBox();
-              }
 
-              return CustomPaint(
-                painter: ScannerOverlay(scanWindow: scanWindow),
-              );
-            },
-          ),
-          Align(
-            alignment: Alignment.bottomCenter,
-            child: Column(
+            // 버튼들
+            Column(
               mainAxisAlignment: MainAxisAlignment.end,
-              //padding: const EdgeInsets.all(16.0),
+              spacing: defaultPadding,
               children: [
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  crossAxisAlignment: CrossAxisAlignment.end,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  spacing: defaultPadding*4,
                   children: [
                     NumberInputButton(controller: controller),
                     ToggleFlashlightButton(controller: controller),
                   ],
                 ),
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.end,
+                  spacing: defaultPadding*4,
                   children: [
                     ExitButton(),
-                    DebugContinueButton(),
+                    ContinueButton(),
                   ],
                 ),
                 SizedBox(height: defaultPadding*2,)
-
               ]
-            ),
-          ),
-        ],
-      ),
+            )
+          ],
+        ),
+      )
     );
   }
 
@@ -155,9 +168,9 @@ class ScannerOverlay extends CustomPainter {
       ..strokeWidth = 4.0;
 
     canvas.drawPath(backgroundWithCutout, backgroundPaint);
-    // 스캔 윈도우의 꺾쇠를 그림
     _drawCorners(canvas, scanWindow, borderPaint);
   }
+
   void _drawCorners(Canvas canvas, Rect rect, Paint paint) {
     final topLeft = rect.topLeft;
     final topRight = rect.topRight;

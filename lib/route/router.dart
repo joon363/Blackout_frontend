@@ -1,5 +1,5 @@
-import 'package:bremen/pages/result_loading_page.dart';
-import 'package:bremen/pages/ride_result_page.dart';
+import 'package:bremen/pages/loading/result_loading_page.dart';
+import 'package:bremen/pages/result/ride_result_page.dart';
 import 'package:flutter/material.dart';
 import 'package:bremen/pages/pages.dart';
 import '/route/route_constants.dart';
@@ -10,7 +10,7 @@ Route<dynamic> generateRoute(RouteSettings settings) {
     case homePageRoute:
       return MaterialPageRoute(
         settings: RouteSettings(name: homePageRoute),
-        builder: (context) => const HomePage(title: "hello"),
+        builder: (context) => const HomePage(),
       );
     case rankPageRoute:
       return MaterialPageRoute(
@@ -25,7 +25,7 @@ Route<dynamic> generateRoute(RouteSettings settings) {
     case qrParkPageRoute:
       return MaterialPageRoute(
         settings: RouteSettings(name: qrParkPageRoute),
-        builder: (context) => const QRParkPage(),
+        builder: (context) => const ParkPage(),
       );
     case cameraPageRoute:
       final List<CameraDescription> cameras = settings.arguments as List<CameraDescription>;
@@ -33,11 +33,6 @@ Route<dynamic> generateRoute(RouteSettings settings) {
       return MaterialPageRoute(
         settings: RouteSettings(name: cameraPageRoute),
         builder: (context) => CameraPage(cameras: cameras),
-      );
-    case fakeCameraPageRoute:
-      return MaterialPageRoute(
-        settings: RouteSettings(name: fakeCameraPageRoute),
-        builder: (context) => FakeCameraPage(),
       );
     case loginPageRoute:
       return MaterialPageRoute(
@@ -82,7 +77,7 @@ Route<dynamic> generateRoute(RouteSettings settings) {
     default:
     return MaterialPageRoute(
       settings: RouteSettings(name: homePageRoute),
-      builder: (context) => const HomePage(title:"hello"),
+      builder: (context) => const HomePage(),
     );
 
   }

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:bremen/Connection/state_manager.dart';
+import 'package:bremen/State/state_manager.dart';
 import 'package:bremen/themes.dart';
 const List<String> names = [
   'assets/images/beforerank.png',

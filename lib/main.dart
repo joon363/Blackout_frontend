@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:bremen/themes.dart';
 import 'package:bremen/route/route_constants.dart';
 import 'package:bremen/route/router.dart' as router;
-import 'package:bremen/Connection/state_manager.dart';
+import 'package:bremen/State/state_manager.dart';
 
 void main() {
   runApp(MultiProvider(
@@ -16,7 +16,6 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(

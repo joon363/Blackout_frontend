@@ -1,10 +1,23 @@
 import 'package:flutter/material.dart';
 export 'package:provider/provider.dart';
 import 'dart:math';
-
+class badge {
+  final String name;
+  final String src;
+  final String condition;
+  badge(
+    this.name,
+    this.src,
+    this.condition,
+  );
+}
 class GlobalState with ChangeNotifier {
   String userName = "BREMEN";
   String userRank = "Silver";
+  List<badge> userBadges = [
+    badge("나무 배지", 'assets/images/tree_badge.png', '5별 주행 1회 달성'),
+    badge("스쿠터 배지", 'assets/images/scooter_badge.png', '스쿠터 주행 20회'),
+  ];
   String scannedQR = "";
   int userRankIndex = 2;
   int requestCount = 0;
@@ -47,23 +60,16 @@ class GlobalState with ChangeNotifier {
   }
   void setQrResult(String str) {
     qrResult = str;
-    //print("QR scanned: $str");
   }
   void updateScore(double n){
     if(n==-1) {
-      Random random = Random();
-      n= random.nextDouble() * 40;
+      return;
     }
     scoreCount ++;
-    if(scoreCount>50){
-      scoreCount=1;
-      totalScore=0;
-    }
     liveScore = n;
     totalScore +=n;
     avgScore = totalScore/scoreCount/100;
     notifyListeners();
-    //print("avg score: $avgScore");
   }
   double getAvgScore() {
     return avgScore;
